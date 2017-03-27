@@ -14,8 +14,9 @@ class Source(models.Model):
                ('S', 'API without Structured Data'),
                ('C', 'No API')
                )
-    ds_type = models.CharField(max_length=1, ds_type=DS_TYPE)
+    ds_type = models.CharField(max_length=1, choices=DS_TYPE)
     call_method = models.TextField()
+    call_kwargs = models.TextField(blank=True, null=True)
     update_time = models.DateTimeField(auto_now=True)
     create_time = models.DateTimeField(auto_now_add=True)
 
@@ -24,7 +25,9 @@ class Source(models.Model):
 
 
 class DataManager(models.Manager):
-    pass
+    def filter_choices(self, meta):
+        # TODO: use meta info
+        return self.get_queryset().all()
 
 
 class Data(models.Model):
@@ -37,6 +40,8 @@ class Data(models.Model):
     msg = models.TextField()
     info = JSONField()
     create_time = models.DateTimeField(auto_now_add=True)
+
+    objects = DataManager()
 
     def __unicode__(self):
         return self.link

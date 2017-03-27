@@ -13,14 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf import settings
+from django.conf.urls import url, include, static
 from django.contrib import admin
 
 urlpatterns = [
     url(r'^verwalter/', admin.site.urls),
     url(r'^jobs/', include('data.urls', namespace='data')),
+    url(r'^', include('user_custom.urls', namespace='user_c')),
+    url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^newsletter/', include('newsletter.urls')),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static.static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = 'Jobi Administration Panel'
 admin.site.site_title = 'Jobi Site Admin'
