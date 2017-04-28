@@ -1,1 +1,1 @@
-settings.py removed from git for security reasons.
+settings.py has been modified for git upload because of security reasons.
