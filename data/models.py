@@ -17,6 +17,7 @@ class Source(models.Model):
     ds_type = models.CharField(max_length=1, choices=DS_TYPE)
     call_method = models.TextField()
     call_kwargs = models.TextField(blank=True, null=True)
+    ex_details = JSONField(null=True, blank=True)
     update_time = models.DateTimeField(auto_now=True)
     create_time = models.DateTimeField(auto_now_add=True)
 
@@ -30,6 +31,7 @@ class DataManager(models.Manager):
         return self.get_queryset().all()
 
 
+# FIXME: migrate to ES
 class Data(models.Model):
     """
     Stores all the data, where info is a JSON type storage which primarily holds
@@ -38,7 +40,7 @@ class Data(models.Model):
     source = models.ForeignKey(Source)
     link = models.TextField()
     msg = models.TextField()
-    info = JSONField()
+    info = JSONField(null=True, blank=True)
     create_time = models.DateTimeField(auto_now_add=True)
 
     objects = DataManager()
