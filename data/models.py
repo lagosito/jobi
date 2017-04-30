@@ -8,6 +8,16 @@ from django.db import models
 
 
 class Source(models.Model):
+    """
+    verbose_name : Shown to the user
+    call_method : path to main method [folder.file.method]
+    ex_details : extra details used by the plugged scrapper/miner script
+    es_structure : ElasticSearch index-type structure location  [folder.file.method]
+    refresh_rate : time interval at which the script will restart after previous completion [integer]
+                   '0' means the source is currently deactivated
+    scrapper_active + last_finish_at : used by Async task manager for next refresh
+    """
+
     name = models.CharField(max_length=20)
     verbose_name = models.CharField(max_length=120)
     DS_TYPE = (('A', 'API with Structured Data'),
@@ -16,8 +26,13 @@ class Source(models.Model):
                )
     ds_type = models.CharField(max_length=1, choices=DS_TYPE)
     call_method = models.TextField()
-    call_kwargs = models.TextField(blank=True, null=True)
     ex_details = JSONField(null=True, blank=True)
+    es_structure = models.TextField()
+    refresh_rate = models.PositiveIntegerField(default=0)
+    counter = models.PositiveIntegerField(default=0)
+    error_count = models.PositiveIntegerField(default=0)
+    scrapper_active = models.BooleanField(default=False)
+    last_finished_at = models.DateTimeField(blank=True, null=True)
     update_time = models.DateTimeField(auto_now=True)
     create_time = models.DateTimeField(auto_now_add=True)
 

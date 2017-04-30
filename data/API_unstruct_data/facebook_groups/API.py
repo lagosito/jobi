@@ -2,9 +2,11 @@ from urlparse import urlparse
 
 import facebook
 import nltk
-from django.conf import settings
 
-ACCESS_TOKEN = settings.FACEBOOK_ACCESS_TOKEN
+ACCESS_TOKEN = 'EAACEdEose0cBAPN0nwT04U4g64Yeelf7fHzbodjzYBkHuuPS9QZBxe2xDuz6LN2oNGClKT5CbAxgeByyM6h0ZClc5eGGm5kx3hh6TYiHJR6kWGJRMeQC4SZA5cRa3EAD2vmZALGcZB9y7dQdAY2ZCkcFID8fJrpKhSqjdnpN11b58UjHHVtuXX7xwSUmsXmv4ZD'
+
+
+# TODO: Exceptions and Activity Log
 
 
 class FacebookGroupCrawler(object):
@@ -97,5 +99,4 @@ def main_method(*args, **kwargs):
     ex_data = kwargs.get('ex_details', {'data': []})
 
     fb = FacebookGroupCrawler(ACCESS_TOKEN)
-    # output = fb.get_keywords_for_groups([('https://www.facebook.com/groups/115194395496242/', 1492905600)])
-    output = fb.get_keywords_for_groups(ex_data['data'])
+    return fb.get_keywords_for_groups(ex_data['data'])

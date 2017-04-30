@@ -8,4 +8,4 @@ DEBUG = True
 if DEBUG:
     from dev import *
 else:
-    from pro import *
+    from prod import *
