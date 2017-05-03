@@ -150,3 +150,8 @@ TINYMCE_COMPRESSOR = True
 
 # Using django-tinymce
 NEWSLETTER_RICHTEXT_WIDGET = "tinymce.widgets.TinyMCE"
+
+
+# Used by Celery and RabbitMq
+# Set interval for the Master to check for scrapper status [seconds]
+RMQ_REFRESH_RATE = 3600.00

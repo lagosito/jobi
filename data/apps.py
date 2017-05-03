@@ -5,3 +5,6 @@ from django.apps import AppConfig
 
 class DataSourcesConfig(AppConfig):
     name = 'data'
+
+    def ready(self):
+        pass

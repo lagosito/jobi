@@ -14,7 +14,7 @@ beat_scheduler = 'django_celery_beat.schedulers:DatabaseScheduler'
 beat_schedule = {
     'update-scrappers-every-hour': {
         'task': 'scrapper_handler',
-        'schedule': 15.0,
+        'schedule': settings.RMQ_REFRESH_RATE,
     },
 }
 broker_heartbeat = 10

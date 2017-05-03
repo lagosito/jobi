@@ -1,10 +1,16 @@
 from __future__ import unicode_literals
 from django.contrib.postgres.fields.jsonb import JSONField
-
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 
-# Create your models here.
+def validate_for_doc_type_name(value):
+    if " " in value:
+        raise ValidationError(
+            _('%(value)s contains spaces'),
+            params={'value': value},
+        )
 
 
 class Source(models.Model):
@@ -15,10 +21,14 @@ class Source(models.Model):
     es_structure : ElasticSearch index-type structure location  [folder.file.method]
     refresh_rate : time interval at which the script will restart after previous completion [integer]
                    '0' means the source is currently deactivated
-    scrapper_active + last_finish_at : used by Async task manager for next refresh
+    scrapper_active + last_finished_at : used by Async task manager for next refresh
     """
 
-    name = models.CharField(max_length=20)
+    name = models.CharField(
+        max_length=20,
+        validators=[validate_for_doc_type_name],
+        help_text="Will be used for internal management. Follow python's variable naming guidelines."
+    )
     verbose_name = models.CharField(max_length=120)
     DS_TYPE = (('A', 'API with Structured Data'),
                ('S', 'API without Structured Data'),
