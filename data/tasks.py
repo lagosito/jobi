@@ -1,7 +1,6 @@
 from pydoc import locate
 
 from django.utils import timezone
-
 from celery import group
 
 from data.models import Source
@@ -24,9 +23,9 @@ def validate(source):
             return True
 
 
-def update_database(data):
-    print data
-    return True
+def update_database(source, data_generator):
+    klass = get_mapping_class(source)
+    klass.bull_create(data_generator)
 
 
 @app.task(name='scrapper_handler')
@@ -41,6 +40,7 @@ def run_main(source_id):
     source.scrapper_active = True
     source.save()
     update_database(
+        source,
         locate(
             SCRAPPER_FOLDER_STRUCTURE[str(source.ds_type)] + '.' + source.call_method
         )(source.ex_details)

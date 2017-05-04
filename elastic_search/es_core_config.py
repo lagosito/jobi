@@ -3,6 +3,8 @@ from pydoc import locate
 from elasticsearch_dsl.connections import connections
 from elasticsearch_dsl import Index
 
+from elasticsearch_dsl import FacetedSearch
+
 from data.models import Source
 from es_settings import *
 
@@ -55,3 +57,11 @@ def update_mappings():
     for source in Source.objects.all():
         klass = get_mapping_class(source)
         klass.init()
+
+
+class CustomSearch(FacetedSearch):
+    index = INDEX_NAME
+
+
+def search(search_arg):
+    return CustomSearch(search_arg).execute()

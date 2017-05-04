@@ -1,5 +1,7 @@
+from elasticsearch.helpers import bulk
 from elasticsearch_dsl import DocType, Text, Date
 
+from elastic_search.es_core_config import create_connection
 from elastic_search.es_settings import INDEX_NAME
 
 
@@ -14,3 +16,7 @@ class DataHead(DocType):
 
     class Meta:
         index = INDEX_NAME
+
+    @staticmethod
+    def bulk_create(docs):
+        bulk(create_connection(), (d.to_dict(True) for d in docs))

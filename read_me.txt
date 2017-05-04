@@ -27,4 +27,7 @@ $ python manage.py runserver
 $ python manage.py force_update_es
 
 
-Run the command python -m nltk.downloader all. To ensure central installation, run the command sudo python -m nltk.downloader -d /usr/local/share/nltk_data all.
+## NLTK for mining. Run the command -
+$ python -m nltk.downloader all.
+## To ensure central installation, run the command
+$ sudo python -m nltk.downloader -d /usr/local/share/nltk_data all.
