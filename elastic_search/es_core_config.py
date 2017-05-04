@@ -1,7 +1,6 @@
 from pydoc import locate
 
 from elasticsearch_dsl.connections import connections
-
 from elasticsearch_dsl import Index
 
 from data.models import Source
@@ -50,7 +49,7 @@ def create_mappings():
             klass.init()
 
 
-# Avoid using as ES doesn't handle deletions in a mapping
+# Avoid using following method as ES doesn't handle deletions in a mapping
 def update_mappings():
     get_index()
     for source in Source.objects.all():

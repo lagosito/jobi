@@ -10,11 +10,13 @@ ACCESS_TOKEN = 'EAACEdEose0cBAPN0nwT04U4g64Yeelf7fHzbodjzYBkHuuPS9QZBxe2xDuz6LN2
 
 
 class FacebookGroupCrawler(object):
+    group_detail_list = ['id', 'cover', 'description', 'name']
+
     def __init__(self, access_token, version='2.8'):
         try:
             self.graph = facebook.GraphAPI(access_token=access_token, version=version)
-        except:
-            print "Error in Authentication"
+        except Exception as e:
+            raise e
         else:
             self.groups = []
             self.grammar = r"""
@@ -31,6 +33,7 @@ class FacebookGroupCrawler(object):
         for group, last_update_time in self.groups:
             self.keywords[group] = {}
             try:
+                # TODO: Get facebook post link
                 posts = self.graph.get_all_connections(id=group, connection_name='feed',
                                                        fields='id,message,updated_time', since=last_update_time)
             except Exception as e:
@@ -51,6 +54,7 @@ class FacebookGroupCrawler(object):
                         for sen in sentences:
                             result = self.cp.parse(sen)
                             self.traverse(result, group, post_id)
+        # TODO: Return message, post link, post_time, group_name get all post related data
         return self.keywords
 
     @staticmethod
@@ -82,6 +86,10 @@ class FacebookGroupCrawler(object):
             for child in t:
                 self.traverse(child, group, post_id)
 
+    @classmethod
+    def get_group_detail_list(cls):
+        return cls.group_detail_list
+
 
 def main_method(*args, **kwargs):
     """
@@ -95,6 +103,8 @@ def main_method(*args, **kwargs):
         ]
     }
     """
+
+    # TODO: Get Group Details
 
     ex_data = kwargs.get('ex_details', {'data': []})
 
