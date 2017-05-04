@@ -1,4 +1,5 @@
 from pydoc import locate
+import traceback
 
 from django.utils import timezone
 from celery import group
@@ -15,7 +16,7 @@ def validate(source):
     else:
         if source.last_finished_at:
             elapsed_time = timezone.now() - source.last_finished_at
-            if elapsed_time.total_seconds() > (source.refresh_rate * 3600.00):
+            if elapsed_time.total_seconds() > (source.refresh_rate * 30.00):  # FIXME
                 return True
             else:
                 return False
@@ -39,16 +40,26 @@ def run_main(source_id):
     source = Source.objects.get(id=source_id)
     source.scrapper_active = True
     source.save()
-    update_database(
-        source,
-        locate(
+    try:
+        print SCRAPPER_FOLDER_STRUCTURE[str(source.ds_type)] + '.' + source.call_method
+        print locate(
             SCRAPPER_FOLDER_STRUCTURE[str(source.ds_type)] + '.' + source.call_method
-        )(source.ex_details)
-    )
-    source.last_finished_at = timezone.now()
-    source.counter += 1
-    source.scrapper_active = False
-    source.save()
+        )
+        update_database(
+            source,
+            locate(
+                SCRAPPER_FOLDER_STRUCTURE[str(source.ds_type)] + '.' + source.call_method
+            )(ex_details=source.ex_details)
+        )
+    except:
+        print traceback.print_exc()
+        source.error_count += 1
+    else:
+        source.last_finished_at = timezone.now()
+    finally:
+        source.counter += 1
+        source.scrapper_active = False
+        source.save()
 
 
 @app.task(name='update_ElasticSearch')
