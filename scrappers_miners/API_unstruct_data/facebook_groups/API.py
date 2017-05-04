@@ -2,9 +2,10 @@ from urlparse import urlparse
 
 import facebook
 import nltk
+
 from scrappers_miners.API_unstruct_data.facebook_groups.es_structure import Facebook
 
-ACCESS_TOKEN = 'EAACEdEose0cBAOZCerQ9GFutd3cc8DcZABCOwfFgUdN9QjgguPpuVGH86Wifz2Gy1hjNNxlMvSDtJiuPcCiO6jqAeNYXpmbZAvQZBugLbhhmkFVptDPIcMrUaiZAig04HnVXZATh8cjmsRzrJanD9cabrXi2ChiASpREHxSNEBPVfpuBtja0FqRNROatlCNrkZD'
+ACCESS_TOKEN = 'EAACEdEose0cBAGMrHXyIziLLt2f9iqGg5NwZB1qQdukv5gXfa6vCiCKRlC4cZAsFZCullI7D1itxEK7frfRSIw22zFLJiaRlORnidkOP1thMZBTN5rdcKMZCrKwjENbZBmYiI8PFOZBNyrsESkUvV82SH4rZAzoBUFpvvOYUU3ZAZAebN8gAFGq9N0M6HK5Ep1MgIZD'
 
 
 # TODO: Exceptions and Activity Log
@@ -15,6 +16,7 @@ class FacebookGroupCrawler(object):
         try:
             self.graph = facebook.GraphAPI(access_token=access_token, version=version)
         except Exception as e:
+            print e
             raise e
         else:
             self.groups = []
@@ -31,17 +33,23 @@ class FacebookGroupCrawler(object):
     def get_group_fields():
         return ','.join(Facebook.group_detail_list)
 
+    @staticmethod
+    def get_post_fields():
+        return ','.join(Facebook.post_extra_data)
+
     def get_keywords_for_groups(self, groups):
         self.groups = [self.get_group_id(group_dict) for group_dict in groups if group_dict['active']]
         for group, last_update_time in self.groups:
             self.keywords[group] = {}
 
             self.keywords[group]['group_details'] = self.get_group_details(group, self.get_group_fields())
+            self.keywords[group]['posts'] = {}
+
 
             try:
                 # TODO: Get facebook post link
                 posts = self.graph.get_all_connections(id=group, connection_name='feed',
-                                                       fields='id,message,updated_time', since=last_update_time)
+                                                       fields=self.get_post_fields(), since=last_update_time)
             except Exception as e:
                 print e
             else:
@@ -50,8 +58,8 @@ class FacebookGroupCrawler(object):
                     post_id = post.get('id')
                     post_update_time = post.get('updated_time')
 
-                    self.keywords[group][post_id] = {
-                        'updated_time': post_update_time,
+                    self.keywords[group]['posts'][post_id] = {
+                        'post_details': post,
                         'keywords': [],
                         'group_name': self.keywords[group]['group_details']['name']
                     }
@@ -89,7 +97,8 @@ class FacebookGroupCrawler(object):
         else:
             # Now we know that t.node is defined
             if t.label() == 'NP':
-                self.keywords[group][post_id]['keywords'].append(''.join([leave for leave, typ in t.leaves()]))
+                self.keywords[group]['posts'][post_id]['keywords'].append(
+                    ' '.join([leave for leave, typ in t.leaves()]))
             for child in t:
                 self.traverse(child, group, post_id)
 
@@ -115,17 +124,37 @@ def main_method(*args, **kwargs):
     ex_data = kwargs.get('ex_details', {'data': []})
 
     fb = FacebookGroupCrawler(ACCESS_TOKEN)
-    return fb.get_keywords_for_groups(ex_data['data'])
+
+    post_key_words = fb.get_keywords_for_groups(ex_data['data'])
+    print post_key_words
+
+    post_objs = []
+
+    for group_id, v in post_key_words.items():
+        posts = post_key_words[group_id]['posts']
+        for post_id, value in posts.items():
+            f = Facebook(
+                source="Facebook",
+                link=value['post_details']['permalink_url'],
+                msg=value['post_details']['message'],
+                create_time=value['post_details']['updated_time'],
+                keywords=value['keywords'],
+                group_name=value['group_name'],
+            )
+            post_objs.append(f)
+    return post_objs
+
+    # return post_key_words
+
+    # return fb.get_keywords_for_groups(ex_data['data'])
 
 
-abc = main_method(ex_details={
-    'data': [
-        {
-            'link': 'https://www.facebook.com/groups/115194395496242/',
-            'update_time': None,
-            'active': True
-        }
-    ]
-})
-
-print abc
+    # main_method(ex_details={
+    #     'data': [
+    #         {
+    #             'link': 'https://www.facebook.com/groups/115194395496242/',
+    #             'update_time': 1492128000,
+    #             'active': True
+    #         }
+    #     ]
+    # })

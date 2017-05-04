@@ -7,7 +7,7 @@ from elastic_search.es_models import DataHead
 class Facebook(DataHead):
 
     group_detail_list = ['id', 'cover', 'description', 'name']
-    post_extra_data = ['']
+    post_extra_data = ['id', 'message', 'updated_time', 'permalink_url']
 
     keywords = Keyword(multi=True)
     group_name = Text()
