@@ -26,7 +26,7 @@ def validate(source):
 
 def update_database(source, data_generator):
     klass = get_mapping_class(source)
-    klass.bull_create(data_generator)
+    klass.bulk_create(data_generator)
 
 
 @app.task(name='scrapper_handler')
