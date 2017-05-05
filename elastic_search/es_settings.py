@@ -3,14 +3,12 @@
 # http://elasticsearch-py.readthedocs.io/en/master/api.html#elasticsearch
 
 
-# TODO: complete implementation - future
 DATABASE_CONNECTION_INFO = {
     'hosts': ['localhost'],
-    'PORT': None,
-    'timeout': 100
+    # 'PORT': None,
+    # 'timeout': 100
 }
 
-# TODO: complete implementation - future [shards][], etc
 INDEX_SETTINGS = {
 
 }

@@ -2,22 +2,14 @@ from pydoc import locate
 
 from elasticsearch_dsl.connections import connections
 from elasticsearch_dsl import Index
-
 from elasticsearch_dsl import FacetedSearch
 
 from data.models import Source
 from es_settings import *
 
 
-# TODO: Complete frame - future [using es_settings.DATABASE_CONNECTION_INFO]
 def create_connection():
-    return connections.create_connection(hosts=['localhost'])
-    # if host is None:
-    #     host = ['localhost']
-    #
-    # else:
-    #     if port is None:
-    #         pass
+    return connections.create_connection(**DATABASE_CONNECTION_INFO)
 
 
 def create_index():

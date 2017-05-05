@@ -35,7 +35,7 @@ class Source(models.Model):
                ('C', 'No API')
                )
     ds_type = models.CharField(max_length=1, choices=DS_TYPE)
-    call_method = models.TextField()
+    miner_class = models.TextField()
     ex_details = JSONField(null=True, blank=True)
     es_structure = models.TextField()
     refresh_rate = models.PositiveIntegerField(default=0)
@@ -49,26 +49,3 @@ class Source(models.Model):
     def __unicode__(self):
         return self.name
 
-
-class DataManager(models.Manager):
-    def filter_choices(self, meta):
-        # TODO: use meta info
-        return self.get_queryset().all()
-
-
-# FIXME: migrate to ES
-class Data(models.Model):
-    """
-    Stores all the data, where info is a JSON type storage which primarily holds
-    fields like 'posted-on' and 'title' of job post.
-    """
-    source = models.ForeignKey(Source)
-    link = models.TextField()
-    msg = models.TextField()
-    info = JSONField(null=True, blank=True)
-    create_time = models.DateTimeField(auto_now_add=True)
-
-    objects = DataManager()
-
-    def __unicode__(self):
-        return self.link
