@@ -136,7 +136,7 @@ def main_method(*args, **kwargs):
             f = Facebook(
                 source="Facebook",
                 link=value['post_details']['permalink_url'],
-                msg=value['post_details']['message'],
+                msg=value['post_details'].get('message', None),
                 create_time=value['post_details']['updated_time'],
                 keywords=value['keywords'],
                 group_name=value['group_name'],
