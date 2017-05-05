@@ -1,23 +1,29 @@
 from urlparse import urlparse
+import time
 
 import facebook
 import nltk
+import requests
 
+from data.utils import APIHead
 from scrappers_miners.API_unstruct_data.facebook_groups.es_structure import Facebook
 
-ACCESS_TOKEN = 'EAACEdEose0cBAN97avzdKjEDs9ARr6HZAFBIMvDqnAZBeyycpjmffKXgtAt3IVMEVni5ZC5nCbq8Hye9WAJR43qXtEPaiWZBrhj3pZCuEQcg2OzmzRpEhXogpZAV1JlyyTZCnzRMHcTLASCRjVLoiiQZAQpONDXID6YVZAJ2VFikSz1NPc8k3GzIcQbicJmk83lcZD'
-
-
-# TODO: Exceptions and Activity Log
+FACEBOOK_APP_ID = '424282464597672'
+FACEBOOK_APP_SECRET = '1bae9480566ded0bee7d0c895798a18a'
 
 
 class FacebookGroupCrawler(object):
-    def __init__(self, access_token, version='2.8'):
+    def __init__(self, app_id, app_secret, version='2.8'):
+
+        oauth_args = dict(client_id=FACEBOOK_APP_ID,
+                          client_secret=FACEBOOK_APP_SECRET,
+                          grant_type='client_credentials')
+        r = requests.get("https://graph.facebook.com/oauth/access_token", params=oauth_args)
         try:
+            access_token = r.json()['access_token']
             self.graph = facebook.GraphAPI(access_token=access_token, version=version)
-        except Exception as e:
-            print e
-            raise e
+        except KeyError as e:
+            raise Exception(r.json().get('error', {}).get('message', ""))
         else:
             self.groups = []
             self.grammar = r"""
@@ -38,21 +44,17 @@ class FacebookGroupCrawler(object):
         return ','.join(Facebook.post_extra_data)
 
     def get_keywords_for_groups(self, groups):
-        self.groups = [self.get_group_id(group_dict) for group_dict in groups if group_dict['active']]
-        for group, last_update_time in self.groups:
-            self.keywords[group] = {}
+        for group_dict in groups:
+            if group_dict['active']:
+                group, last_update_time = self.get_group_id(group_dict)
+                self.keywords[group] = {}
 
-            self.keywords[group]['group_details'] = self.get_group_details(group, self.get_group_fields())
-            self.keywords[group]['posts'] = {}
+                self.keywords[group]['group_details'] = self.get_group_details(group, self.get_group_fields())
+                self.keywords[group]['posts'] = {}
 
-
-            try:
-                # TODO: Get facebook post link
                 posts = self.graph.get_all_connections(id=group, connection_name='feed',
                                                        fields=self.get_post_fields(), since=last_update_time)
-            except Exception as e:
-                print e
-            else:
+
                 for post in posts:
                     post_message = post.get('message', None)
                     post_id = post.get('id')
@@ -69,6 +71,9 @@ class FacebookGroupCrawler(object):
                         for sen in sentences:
                             result = self.cp.parse(sen)
                             self.traverse(result, group, post_id)
+
+                # Update Time for group
+                group_dict['update_time'] = int(time.time())
         # TODO: Return message, post link, post_time, group_name get all post related data
         return self.keywords
 
@@ -78,9 +83,9 @@ class FacebookGroupCrawler(object):
         path = urlparse(group_link).path.split('/')
         try:
             i = path.index('groups')
-            return path[i + 1], group_link_dict['update_time']
-        except:
-            print "Error in Link : " + group_link
+            return path[i + 1], group_link_dict.get('update_time', None)
+        except Exception as e:
+            raise Exception("Error in fetching group_link. [%s]" % e.message)
 
     @staticmethod
     def process_text(text):
@@ -106,55 +111,44 @@ class FacebookGroupCrawler(object):
         return self.graph.get_object(id=group_id, fields=fields)
 
 
-def main_method(*args, **kwargs):
-    """
-    ex_details: {
-        data: [
-            {
-                'link': '[complete_link]',
-                'update_time: '[UNIX_TIMESTAMP]',
-                'active': '[Boolean]'
-            }
-        ]
-    }
-    """
+class FacebookAPI(APIHead):
+    def execute(self):
+        """
+        ex_details: {
+            data: [
+                {
+                    'link': '[complete_link]',
+                    'update_time: '[UNIX_TIMESTAMP]',
+                    'active': '[Boolean]'
+                }
+            ]
+        }
+        """
 
-    # TODO: Get Group Details
+        # TODO: Get Group Details
 
-    ex_data = kwargs.get('ex_details', {'data': []})
+        if self.ex_details:
+            ex_data = self.ex_details
+        else:
+            raise Exception("No Argument - 'ex_details' provided")
 
-    fb = FacebookGroupCrawler(ACCESS_TOKEN)
+        fb = FacebookGroupCrawler(FACEBOOK_APP_ID, FACEBOOK_APP_SECRET)
 
-    post_key_words = fb.get_keywords_for_groups(ex_data['data'])
-    print post_key_words
+        post_key_words = fb.get_keywords_for_groups(ex_data['data'])
 
-    post_objs = []
+        post_objs = []
 
-    for group_id, v in post_key_words.items():
-        posts = post_key_words[group_id]['posts']
-        for post_id, value in posts.items():
-            f = Facebook(
-                source="Facebook",
-                link=value['post_details']['permalink_url'],
-                msg=value['post_details'].get('message', None),
-                create_time=value['post_details']['updated_time'],
-                keywords=value['keywords'],
-                group_name=value['group_name'],
-            )
-            post_objs.append(f)
-    return post_objs
+        for group_id, v in post_key_words.items():
+            posts = post_key_words[group_id]['posts']
+            for post_id, value in posts.items():
+                f = Facebook(
+                    source="Facebook",
+                    link=value['post_details']['permalink_url'],
+                    msg=value['post_details'].get('message', None),
+                    create_time=value['post_details']['updated_time'],
+                    keywords=value['keywords'],
+                    group_name=value['group_name'],
+                )
+                post_objs.append(f)
 
-    # return post_key_words
-
-    # return fb.get_keywords_for_groups(ex_data['data'])
-
-
-    # main_method(ex_details={
-    #     'data': [
-    #         {
-    #             'link': 'https://www.facebook.com/groups/115194395496242/',
-    #             'update_time': 1492128000,
-    #             'active': True
-    #         }
-    #     ]
-    # })
+        self.data_iterator = post_objs
