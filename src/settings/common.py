@@ -39,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'rest_framework',
+
     'tinymce',
     'django_extensions',
     'sorl.thumbnail',
     'newsletter',
+
     'django_celery_beat',
     'django_celery_results',
 
@@ -148,8 +150,14 @@ TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = True
 
 
-# Using django-tinymce
+# FIXME : Complete installation of django newsletter
+# django-newsletter
+# https://django-newsletter.readthedocs.io/en/latest/index.html
+
+# Using django-tinymce as editor
 NEWSLETTER_RICHTEXT_WIDGET = "tinymce.widgets.TinyMCE"
+
+NEWSLETTER_CONFIRM_EMAIL = True
 
 
 # Used by Celery and RabbitMq

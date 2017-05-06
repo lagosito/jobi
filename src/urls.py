@@ -26,9 +26,10 @@ urlpatterns = [
 
 ]
 
-if settings.DEBUG:
-    urlpatterns += static.static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Adds MEDIA_URL and STATIC_URL config as defined in settings
+urlpatterns += static.static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 admin.site.site_header = 'Jobi Administration Panel'
 admin.site.site_title = 'Jobi Site Admin'
