@@ -1,6 +1,5 @@
 from pydoc import locate
 import traceback
-import json
 
 from django.utils import timezone
 from celery import group
@@ -29,13 +28,24 @@ def validate(source):
 def update_database(source, data_generator):
     klass = get_mapping_class(source)
     klass.bulk_create(data_generator)
+    ActivityLog.objects.create_log(
+        None, entity=source, level='I', view_name='data.tasks.update_database',
+        arguments=['source_obj', 'data_generator'],
+        message='Data bulk created in ElasticSearch.'
+    )
 
 
 @app.task(name='scrapper_handler')
 def run_all():
+    ActivityLog.objects.create_log(
+        None, level='I', view_name='data.tasks.run_all', message='Scrapper Handler Started'
+    )
     sources = Source.objects.all()
     if sources:
         group(run_main.s(source.id) for source in sources if validate(source))()
+    ActivityLog.objects.create_log(
+        None, level='I', view_name='data.tasks.run_all', message='Scrapper Handler Completed'
+    )
 
 
 @app.task(name='scrapper')
@@ -43,12 +53,17 @@ def run_main(source_id):
     source = Source.objects.get(id=source_id)
     source.scrapper_active = True
     source.save()
+    ActivityLog.objects.create_log(
+        None, entity=source, level='I', view_name='data.tasks.run_main', arguments=[source_id],
+        message='Scrapper/Miner started.'
+    )
     try:
         klass_obj = locate(
-            SCRAPPER_FOLDER_STRUCTURE[str(source.ds_type)] + '.' + source.miner_class
+            SCRAPPER_FOLDER_STRUCTURE[str(source.ds_type)] + '.' + source.miner_class, forceload=1
         )(ex_details=source.ex_details)
+        klass_obj.execute()
         update_database(
-            source, klass_obj.execute()
+            source, klass_obj.get_data()
         )
     except Exception as e:
         ActivityLog.objects.create_log(
@@ -58,8 +73,12 @@ def run_main(source_id):
         )
         source.error_count += 1
     else:
-        source.ex_details = json.dumps(klass_obj.get_ex_details())
+        source.ex_details = klass_obj.get_ex_details()
         source.last_finished_at = timezone.now()
+        ActivityLog.objects.create_log(
+            None, entity=source, level='I', view_name='data.tasks.run_main', arguments=[source_id],
+            message='Scrapper/Miner completed successfully.'
+        )
     finally:
         source.counter += 1
         source.scrapper_active = False
@@ -70,6 +89,20 @@ def run_main(source_id):
 def update_es_index(source_id):
     index = get_index()
     source = Source.objects.get(id=source_id)
-    klass = get_mapping_class(source)
-    if not index.exists_type(doc_type=klass.__name__):
-        klass.init()
+    try:
+        klass = get_mapping_class(source)
+        if not index.exists_type(doc_type=klass.__name__):
+            klass.init()
+    except Exception as e:
+        ActivityLog.objects.create_log(
+            None, entity=source, level='C', view_name='data.tasks.update_es_index', arguments=[source_id],
+            message='Error in updating ElasticSearch with new mapping with error message - %s' % e.message,
+            traceback=traceback.format_exc()
+        )
+
+    else:
+        ActivityLog.objects.create_log(
+            None, entity=source, level='I', view_name='data.tasks.update_es_index',
+            arguments=[source_id],
+            message='ElasticSearch index updated with new mapping.'
+        )

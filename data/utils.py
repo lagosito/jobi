@@ -5,7 +5,6 @@ class APIHead(object):
     def __init__(self, *args, **kwargs):
         self.ex_details = kwargs.get('ex_details')
         self.data_iterator = None
-        self.traceback_info = None
 
     @abc.abstractmethod
     def execute(self):
@@ -18,7 +17,7 @@ class APIHead(object):
         return self.ex_details
 
     def get_data(self):
-        return self.data_iterator
-
-    def get_traceback(self):
-        return self.traceback_info
+        if self.data_iterator is not None:
+            return self.data_iterator
+        else:
+            raise NotImplementedError("data_iterator not assigned an iterable object.")
