@@ -1,4 +1,5 @@
 import traceback
+import abc
 
 from polyglot.text import Text
 
@@ -27,7 +28,7 @@ class NLP(object):
         self.sen = Text(context, hint_language_code='en')
 
     def filter_relevant(self):
-        tokens = [token for token in self.sen.words() if token in FILTER_WORDS]
+        tokens = [token for token in self.sen.words() if token.lower() in FILTER_WORDS]
         if tokens:
             return True, tokens
         else:
@@ -38,3 +39,25 @@ class NLP(object):
 
     def get_keywords(self):
         return [word for word, tag in self.sen.pos_tags if tag in ACCEPTABLE_KEYWORDS_TYPE]
+
+
+class APIHead(object):
+    def __init__(self, *args, **kwargs):
+        self.ex_details = kwargs.get('ex_details')
+        self.data_iterator = None
+
+    @abc.abstractmethod
+    def execute(self):
+        """
+        :returns list of items to be fed in ElasticSearch or a generator for the same.
+        """
+        raise NotImplementedError('Please implement this method in class "%s"' % self.__class__.__name__)
+
+    def get_ex_details(self):
+        return self.ex_details
+
+    def get_data(self):
+        if self.data_iterator is not None:
+            return self.data_iterator
+        else:
+            raise NotImplementedError("data_iterator not assigned an iterable object.")

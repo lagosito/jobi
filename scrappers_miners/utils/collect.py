@@ -40,7 +40,7 @@ def create_list_file():
         filter_words_file = open(FILTER_WORD_FILE_PATH, 'w')
 
         for n in set(neighbors + FILTER_LIST_WORDS):
-            filter_words_file.write(n + '\n')
+            filter_words_file.write(n.lower() + '\n')
 
         filter_words_file.close()
 

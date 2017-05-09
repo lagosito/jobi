@@ -2,8 +2,6 @@ from sys import stdout
 
 from elastic_search.es_models import DataHead
 
-__author__ = 'rushil'
-
 
 def main_m(*args, **kwargs):
     stdout.write("Running")

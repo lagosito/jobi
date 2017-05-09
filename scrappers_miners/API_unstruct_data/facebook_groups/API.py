@@ -5,7 +5,7 @@ import facebook
 import nltk
 import requests
 
-from data.utils import APIHead
+from scrappers_miners.utils.utils import APIHead
 from scrappers_miners.API_unstruct_data.facebook_groups.es_structure import Facebook
 
 FACEBOOK_APP_ID = '424282464597672'
