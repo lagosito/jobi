@@ -1,5 +1,4 @@
-### In order of Execution [run from project source in environment]
-### Some commands will change for production while some will be obsolete
+#### In order of Execution [run from project source in environment]
 
 
 ## Database migrations
@@ -11,22 +10,41 @@ $ python manage.py migrate
 $ python manage.py createsuperuser
 
 
+## Initialize ElasticSearch and NLP toolkit
+## [--download] tag will fetch all the needed NLP libraries. Important for the first time.
+$ python manage.py initialize_site --download
+
+
 ## Start Celery and its Beat Scheduler
 $ celery -A src worker -B -l info
-
-
-## Initialize ElasticSearch
-$ python manage.py initialize_site
 
 
 ## Start python Server
 $ python manage.py runserver
 
 
-## To update ElasticSearch [capable on runtime]
-$ python manage.py force_update_es
+#### Following commands aren't setup related but may be needed in future
 
 
+## To update ElasticSearch mappings
+## WARNING: It won't handle deletions in ES mappings
+## Capable on runtime
+$ python manage.py es_force_migrate
+
+
+## To instantiate a mining process manually for a particular source
+## [source_name] is essential as stored in the database
+## Capable on runtime
+$ python manage.py force_mine_source [source_name]
+
+
+## To instantiate a mining process manually for all stored sources
+## Capable on runtime
+$ python manage.py force_mine_source_all
+
+
+
+# FIXME: seems obsolete. check with pranav
 ## NLTK for mining. Run the command -
 $ python -m nltk.downloader all.
 ## To ensure central installation, run the command

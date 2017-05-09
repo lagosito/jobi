@@ -20,4 +20,4 @@ class Command(BaseCommand):
                 "Some problem occurred. Please follow traceback. Message - %s" % e.message
             )
         else:
-            self.stdout.write("ElasticSearch Database updated.")
+            self.stdout.write("ElasticSearch Database will be updated shortly. Track using Activity Log.")

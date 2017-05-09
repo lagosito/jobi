@@ -12,7 +12,7 @@ def force_mine(source_name):
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument('source', type=str)
+        parser.add_argument('source', type=str, help="Name of the Data Source to be mined")
 
     def handle(self, *args, **options):
         try:
