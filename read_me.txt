@@ -1,5 +1,20 @@
 #### In order of Execution [run from project source in environment]
 
+## Pre-requisites
+# ElasticSearch Installation and running
+# RabbitMQ Installation, setup and running
+# PostgreSQL Installation, setup and running
+
+
+## External dependencies
+
+# Used by polyglot for mining
+$ sudo apt-get install python-numpy libicu-dev
+
+
+## Get all dependencies (in an existing Environment)
+$ sudo pip install -r requirements.txt
+
 
 ## Database migrations
 $ python manage.py makemigrations

@@ -17,7 +17,7 @@ class ActivityLogManager(models.Manager):
         try:
             info = {
                 'ip': self.get_ip(request),
-                'view_name': str(kwargs.pop('view', "")),
+                'view_name': str(kwargs.pop('view_name', "")),
                 'arguments': kwargs.pop('arguments', {}),
                 'message': str(kwargs.pop('message', "")),
                 'act_type': kwargs.pop('act_type', ""),
