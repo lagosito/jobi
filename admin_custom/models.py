@@ -31,6 +31,10 @@ class ActivityLogManager(models.Manager):
             )
             return False
         else:
+            if level != 'I':
+                print '-----------------------------'
+                print 'Error logged in Activity Log [%s]' % level
+                print '-----------------------------'
             return True
 
     @staticmethod

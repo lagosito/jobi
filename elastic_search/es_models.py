@@ -9,9 +9,10 @@ class DataHead(DocType):
     source = Text()
     link = Text()
     msg = Text()
-    location = Text()
+    location = Text(multi=True)
     interest = Text()
     job_type = Text()
+    organisation = Text(multi=True)
     create_time = Date()
 
     class Meta:
