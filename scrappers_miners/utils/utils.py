@@ -23,7 +23,6 @@ def load_filter_words():
 FILTER_WORDS = load_filter_words()
 
 
-# Fixme: set polyglot data directory
 class NLP(object):
 
     def __init__(self, context, *args, **kwargs):
