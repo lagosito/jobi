@@ -137,8 +137,8 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_dev", "media_root")
 
 SITE_ID = 1
 
-TINYMCE_JS_URL = os.path.join(MEDIA_URL, "tinymce/jscripts/tiny_mce/tiny_mce.js")
-TINYMCE_JS_ROOT = os.path.join(MEDIA_ROOT, 'tinymce/jscripts/')
+TINYMCE_JS_URL = os.path.join(STATIC_URL, "/tiny_mce/tiny_mce.js")
+TINYMCE_JS_ROOT = os.path.join(STATIC_URL, 'tiny_mce')
 
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "table,spellchecker,paste,searchreplace",

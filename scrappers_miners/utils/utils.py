@@ -28,7 +28,7 @@ class NLP(object):
         self.sen = Text(context, hint_language_code='en')
 
     def filter_relevant(self):
-        tokens = [token for token in self.sen.words() if token.lower() in FILTER_WORDS]
+        tokens = [token for token in self.sen.words if token.lower() in FILTER_WORDS]
         if tokens:
             return True, tokens
         else:

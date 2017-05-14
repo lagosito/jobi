@@ -2,7 +2,8 @@ import os
 
 from django.conf import settings
 
-DOWNLOAD_DIR = os.path.join(os.path.dirname(settings.BASE_DIR), 'nlp-libs', 'polyglot_libs')
+ROOT_DIR = os.path.join(os.path.dirname(settings.BASE_DIR), 'nlp-libs')
+DOWNLOAD_DIR = os.path.join(ROOT_DIR, 'polyglot_data')
 
 # To filter scrapping results with relevant content using following words and their nearest [k] neighbors
 FILTER_LIST_WORDS = ['jobs', 'employee', 'freelance', 'employment', 'fulltime', 'work', 'parttime', 'placement', 'gig',
