@@ -24,7 +24,6 @@ FILTER_WORDS = load_filter_words()
 
 
 class NLP(object):
-
     def __init__(self, context, *args, **kwargs):
         self.sen = Text(context, hint_language_code='en')
 
@@ -35,9 +34,14 @@ class NLP(object):
         else:
             return False, []
 
-    # FIXME : Remove comma from list
     def get_entities(self):
-        return dict((entity.tag.lstrip('I-'), entity) for entity in self.sen.entities)
+        di = {}
+        for entity in self.sen.entities:
+            key = entity.tag.lstrip('I-')
+            value = [en for en in entity]
+            prev = di.setdefault(key, value)
+            di[key] = list(set(prev + value))
+        return di
 
     def get_keywords(self):
         return [word for word, tag in self.sen.pos_tags if tag in ACCEPTABLE_KEYWORDS_TYPE]
