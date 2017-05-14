@@ -23,7 +23,9 @@ def load_filter_words():
 FILTER_WORDS = load_filter_words()
 
 
+# Fixme: set polyglot data directory
 class NLP(object):
+
     def __init__(self, context, *args, **kwargs):
         self.sen = Text(context, hint_language_code='en')
 
@@ -34,6 +36,7 @@ class NLP(object):
         else:
             return False, []
 
+    # FIXME : Remove comma from list
     def get_entities(self):
         return dict((entity.tag.lstrip('I-'), entity) for entity in self.sen.entities)
 

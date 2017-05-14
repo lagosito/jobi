@@ -13,7 +13,7 @@ $ sudo apt-get install python-numpy libicu-dev
 
 
 ## Get all dependencies (in an existing Environment)
-$ sudo pip install -r requirements.txt
+$ pip install -r requirements.txt
 
 
 ## Database migrations
