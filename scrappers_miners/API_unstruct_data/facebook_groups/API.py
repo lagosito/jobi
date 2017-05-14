@@ -1,4 +1,5 @@
 from urlparse import urlparse
+import time
 
 import facebook
 import requests
@@ -98,5 +99,4 @@ class FacebookAPI(APIHead):
                             yield f
 
                 # Update Time for group
-                            # group_dict['update_time'] = int(time.time())
-
+                group_dict['update_time'] = int(time.time())
