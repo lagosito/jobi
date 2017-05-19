@@ -75,7 +75,7 @@
 
     >
     <
-        label
+        label;
     >
         Name:;
     <
@@ -107,9 +107,9 @@
             className = "job-el" >
                     {this.props.name
         } {
-                this
+                this;
     .
-        props
+        props;
     .
         email
     }
@@ -157,7 +157,7 @@
         handleSubmit(event) {
 
             console.log(this.state);
-            var server_address = "http://0.0.0.0:8000";
+            var server_address = "";
             var final_url = server_address + "/search_jobs/?role=Developer";
 
             $.ajax({

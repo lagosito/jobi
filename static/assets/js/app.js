@@ -79,7 +79,7 @@ $(function () {
 
     var job_post = '';
     var recent_job_post = '';
-    var server_address = "http://0.0.0.0:8000";
+    var server_address = "";
     var recent_job_api_url = server_address + '/recent_jobs/';
     var newsletter_subscription_api_url = server_address + '/newsletter_add_subscription/';
 
