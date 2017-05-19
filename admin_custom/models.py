@@ -75,4 +75,4 @@ class ActivityLog(models.Model):
     objects = ActivityLogManager()
 
     def __unicode__(self):
-        return self.actor or "No unicode - Activity Log"
+        return self.user or "No unicode - Activity Log"
