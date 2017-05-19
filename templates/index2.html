@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <title>Job Management</title>
+    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/plugins/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/app.css">
+
+</head>
+<body id='react-app' data-spy="scroll" data-target=".navbar" data-offset="230">
+
+
+<script src="https://unpkg.com/react@15/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> -->
+
+<script src="assets/plugins/jquery/jquery-1.12.0.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/scrollreveal/dist/scrollreveal.min.js"></script>
+<script src="assets/plugins/slick/slick.min.js"></script>
+<script src="assets/js/app.js"></script>
+
+<script type="text/babel">
+
+    class ContactSection extends React.Component {
+        render() {
+            return (
+                    < section;
+            id = "contact_section" >
+                    < div;
+            className = "container" >
+                    < div;
+            className = "contact-section" >
+                    < h3 > Your;
+            Email < / h3 >
+            < p > Get;
+            our;
+            top;
+            day
+            's job offers delivered to your inbox</p>
+            < form;;
+            action = "" >
+                    < div;
+            className = "row" >
+                    < div;
+            className = "col-sm-offset-1 col-sm-10" >
+                    < div;
+            className = "row" >
+                    < div;
+            className = "col-sm-6" >
+                    < div;
+            className = "form-field" >
+                    < input;
+            type = "text";
+            className = "form-control";
+            value = "name" / >
+                    < / div >
+                    < / div >
+                    < div;
+            className = "col-sm-6" >
+                    < div;
+            className = "form-field" >
+                    < input;
+            type = "text";
+            className = "form-control";
+            value = "hello@gmail.com" / >
+                    < / div >
+                    < / div >
+                    < div;
+            className = "col-sm-6" >
+                    < div;
+            className = "form-field" >
+                    < input;
+            type = "text";
+            className = "form-control";
+            value = "What are you looking ?" / >
+                    < / div >
+                    < / div >
+                    < div;
+            className = "col-sm-6" >
+                    < div;
+            className = "form-field" >
+                    < button;
+            type = "button";
+            className = "slick-next slick-arrow" > Next < / button >
+
+                    < / div >
+                    < / div >
+                    < / div >
+                    < / div >
+                    < / div >
+
+                    < / form >
+
+                    < / div >
+                    < / div >
+                    < / section >;
+        )
+        }
+    }
+
+    class JobContainer extends React.Component {
+        render() {
+            return (
+                    < section >
+                    < div;
+            className = "container";
+            id = "jobs_container" >
+
+                    < / div >
+                    < / section >;
+        )
+        }
+
+    }
+
+    class SearchJobSection extends React.Component {
+        render() {
+            return (
+                    < section;
+            id = "search_jobs_section" >
+                    < div;
+            className = "container" >
+                    < form;
+            action = "";
+            className = "search-form" >
+                    < input;
+            type = "text";
+            value = "All Jobs" / >
+                    < button;
+            type = "submit" > < i;
+            className = "fa fa-search" > < /i></
+            button >
+            < / form >
+            < / div >
+            < / section >;;
+        )
+        }
+
+    }
+
+    class LogoSection extends React.Component {
+        render() {
+            return (
+                    < section;
+            id = "logos_section" >
+                    < div;
+            className = "container" >
+                    < div;
+            className = "logo-section clearfix" >
+                    < div;
+            className = "pull-left" >
+                    < i;
+            className = "fa fa-bell" > < / i >
+                    Turn;
+            on;
+            email;
+            alerts;
+            for this search
+            < / div >
+            < ul
+            className = "list-unstyled pull-right" >
+                    < li > < a;
+            href = "#" > < i;
+            className = "fa fa-facebook" > < /i> </
+            a > < / li >
+            < li > < a;;
+            href = "#" > < i;
+            className = "fa fa-twitter" > < /i> </
+            a > < / li >
+            < li > < a;;
+            href = "#" > < i;
+            className = "fa fa-google" > < /i> </
+            a > < / li >
+            < li > < a;;
+            href = "#" > < i;
+            className = "fa fa-linkedin" > < /i> </
+            a > < / li >
+            < li > < a;;
+            href = "#" > < i;
+            className = "fa fa-vimeo" > < /i> </
+            a > < / li >
+            < / ul >
+
+            < / div >
+
+            < / div >
+
+            < / section >;;
+        )
+        }
+    }
+
+    class JobSection extends React.Component {
+        render() {
+            return (
+                    < section;
+            className = "job-section" >
+                    < div;
+            className = "container" >
+
+                    < div;
+            className = "nav nav-tabs job-slider" >
+                    < div >
+                    < a;
+            href = "#";
+            data - toggle = "tab" >
+                    < div >
+                    < p > posted;
+            at;
+            4
+        :
+            32;
+            pm < / p >
+            < p > < strong > Creative;
+            Director;
+            Digital < /strong></
+            p >
+            < p > IBM;;
+            Company < / p >
+            < p > Berlin / Deutshland < / p >
+            < / div >
+
+            < / a >
+            < / div >
+            < div >
+            < a;
+            href = "#";
+            data - toggle = "tab" >
+                    < div >
+                    < p > posted;
+            at;
+            4
+        :
+            32;
+            pm < / p >
+            < p > < strong > Creative;
+            Director;
+            Digital < /strong></
+            p >
+            < p > IBM;;
+            Company < / p >
+            < p > Berlin / Deutshland < / p >
+            < / div >
+
+            < / a >
+            < / div >
+            < div >
+            < a;
+            href = "#";
+            data - toggle = "tab" >
+                    < div >
+                    < p > posted;
+            at;
+            4
+        :
+            32;
+            pm < / p >
+            < p > < strong > Creative;
+            Director;
+            Digital < /strong></
+            p >
+            < p > IBM;;
+            Company < / p >
+            < p > Berlin / Deutshland < / p >
+            < / div >
+
+            < / a >
+            < / div >
+            < div >
+            < a;
+            href = "#";
+            data - toggle = "tab" >
+                    < div >
+                    < p > posted;
+            at;
+            4
+        :
+            32;
+            pm < / p >
+            < p > < strong > Creative;
+            Director;
+            Digital < /strong></
+            p >
+            < p > IBM;;
+            Company < / p >
+            < p > Berlin / Deutshland < / p >
+            < / div >
+
+            < / a >
+            < / div >
+            < div >
+            < a;
+            href = "#";
+            data - toggle = "tab" >
+                    < div >
+                    < p > posted;
+            at;
+            4
+        :
+            32;
+            pm < / p >
+            < p > < strong > Creative;
+            Director;
+            Digital < /strong></
+            p >
+            < p > IBM;;
+            Company < / p >
+            < p > Berlin / Deutshland < / p >
+            < / div >
+
+            < / a >
+            < / div >
+            < div >
+            < a;
+            href = "#";
+            data - toggle = "tab" >
+                    < div >
+                    < p > posted;
+            at;
+            4
+        :
+            32;
+            pm < / p >
+            < p > < strong > Creative;
+            Director;
+            Digital < /strong></
+            p >
+            < p > IBM;;
+            Company < / p >
+            < p > Berlin / Deutshland < / p >
+            < / div >
+
+            < / a >
+            < / div >
+            < div >
+            < a;
+            href = "#";
+            data - toggle = "tab" >
+                    < div >
+                    < p > posted;
+            at;
+            4
+        :
+            32;
+            pm < / p >
+            < p > < strong > Creative;
+            Director;
+            Digital < /strong></
+            p >
+            < p > IBM;;
+            Company < / p >
+            < p > Berlin / Deutshland < / p >
+            < / div >
+            < / a >
+            < / div >
+            < / div >
+
+            < / div >
+
+            < / section >;
+        )
+        };;;;;;;
+
+    }
+
+    class Home extends React.Component {
+        render() {
+            return (
+                    < div;
+            id = "home" >
+                    < div;
+            className = "container text-center" >
+                    < div;
+            className = "row" >
+                    < div;
+            className = "col-lg-12" >
+                    < div;
+            className = "home-content" >
+                    < h1 > I
+            'm an
+            < select;;
+            id = "keyword" >
+                    < option;
+            value = "Art Director" > Art;
+            Director < / option >
+            < option;
+            value = "Director" > Director < / option >
+                    < option;
+            value = "Developer" > Developer < / option >
+                    < / select >
+                    < br / > looking;
+            for a job in
+            < select
+            id = "location" >
+                    < option;
+            value = "London" > London < / option >
+                    < option;
+            value = "Berlin" > Berlin < / option >
+                    < option;
+            value = "Milan" > Milan < / option >
+                    < /select><br / > as;
+            a
+            < select;
+            id = "job_type" > < br / >
+                    < option;
+            value = "Freelancer" > freelancer < / option >
+                    < option;
+            value = "Full Time" > Full;
+            time < / option >
+            < option;
+            value = "Part time" > Part;
+            time < / option >
+            < option;
+            value = "Internship" > Internship < / option >
+                    < / select >
+                    < input;
+            id = "when";
+            type = "text";
+            placeholder = "now";
+            value = "";
+            className = "" / >
+        .</
+            h1 >
+            < / div >
+
+            < / div >
+            < / div >
+            < / div >
+            < / div >;
+        )
+        };
+    }
+
+    class NavBar extends React.Component {
+        render() {
+            return (
+                    < nav;
+            className = "navbar navbar-default" >
+                    < div;
+            className = "container" >
+                    < div;
+            className = "header-content text-center" >
+                    < div;
+            className = "pull-left" >
+                    < div;
+            className = "menu-toggle" >
+                    < a;
+            className = "circle";
+            href = "#" >
+                    < div;
+            className = "lines" >
+                    < i > < / i >
+                    < i > < / i >
+                    < i;
+            className = "no-margin" > < / i >
+                    < / div >
+
+
+                    < / a >
+                    < / div >
+
+                    < / div >
+                    < div;
+            className = "logo" >
+                    < img;
+            src = "assets/images/logo.jpg" / >
+                    < / div >
+                    < div;
+            className = "pull-right" >
+                    < div;
+            className = "lang-links" >
+                    < ul;
+            className = "list-unstyled" >
+                    < li > < a;
+            href = "#" > DE < /a></
+            li >
+            < li > < span > < /span></;
+            li >
+            < li > < a;;
+            href = "#" > EN < /a></
+            li >
+            < / ul >
+            < / div >
+            < / div >
+            < / div >
+            < / div >
+            < / nav >;;
+        )
+        }
+
+    }
+
+    class HomeSection extends React.Component {
+        render() {
+            return (
+
+                    < div >
+                    < NavBar / >
+                    < Home / >
+                    < / div >;
+        )
+        }
+
+    }
+
+    class Menu extends React.Component {
+        render() {
+            return (
+                    < div;
+            className = "menu-links" >
+                    < a;
+            href = "javascript:;";
+            className = "close-menu" > < i;
+            className = "fa fa-times" > < /i> </
+            a >
+            < ul;;
+            className = "list-unstyled" >
+                    < li > < a;
+            href = "#" > Home < /a> </
+            li >
+            < li > < a;;
+            href = "#" > Jobs < /a> </
+            li >
+            < li > < a;;
+            href = "#" > About < /a> </
+            li >
+            < li > < a;;
+            href = "#" > Contact < /a> </
+            li >
+            < / ul >
+            < / div >;;
+        )
+        }
+    }
+
+    class JobsView extends React.Component {
+        render() {
+            return (
+                    < div >
+                    < Menu / >
+
+                    < HomeSection / >
+
+                    < JobSection / >
+
+                    < LogoSection / >
+
+                    < SearchJobSection / >
+
+                    < JobContainer / >
+
+                    < ContactSection / >
+                    < / div >;
+        )
+        }
+    }
+
+
+    ReactDOM.render( < JobsView / >, document.getElementById("react-app"))
+</script>
+
+<!--     <script >
+
+
+
+$(function() {
+
+    $("#logos_section").hide();
+    $("#search_jobs_section").hide();
+    $("#jobs_section").hide();
+    $("#contact_section").hide();
+
+    job_post = '';
+
+    function create_job_posts(job_title, job_post_time, job_description, job_url ){
+        job_post = job_post + '<div class="job-post">'+
+                        '<a href="'+ job_url +'">'+
+                            '<div class="job-title clearfix">'+
+                                '<div class="pull-left">'+
+                                    '<h3>'+ job_title +'</h3>'+
+                                '</div>'+
+                                '<div class="pull-right">'+
+                                    '<span>posted at '+ job_post_time + '</span>'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="job-description">'+
+                                '<p><strong>' + job_description + '</p>'+
+                            '</div>'+
+                         '</a>'+
+                    '</div>';
+
+    }
+
+    $("#keyword").on("change", function(){
+
+
+       job_post = '';
+       keyword_val = $("#keyword").val();
+       location_val = $("#location").val();
+       job_type_val = $("#job_type").val();
+       when_val = $("#when").val();
+
+       server_address = "http://207.154.214.38:8000";
+       final_url = server_address + "/search_jobs/?role=" + keyword_val; 
+       // + "&location=" + location_val + "&job_type=" + job_type + "&when=" + when_val ;
+       
+       $.ajax({
+            type: 'GET',
+            url: final_url,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function(response) {
+
+                console.log(response);
+                console.log('-------------------------------------------------------------------------');
+
+                $("#logos_section").show();
+                $("#search_jobs_section").show();
+                $("#jobs_section").show();
+                $("#contact_section").show();
+
+                //$('#jobs_container').html(JSON.stringify(response));
+
+
+                    job_posts_entries = response['hits']['hits'];
+
+                    console.log(Object.keys(job_posts_entries).length);
+                    console.log(job_posts_entries[0]['_source']);
+
+
+                for(i=0;i<Object.keys(job_posts_entries).length;i++){
+
+                    job_title = job_posts_entries[i]['_source']['keywords'][0];
+                    job_url = job_posts_entries[i]['_source']['link'];
+                    job_description = job_posts_entries[i]['_source']['msg'];
+                    job_post_time = job_posts_entries[i]['_source']['create_time'];
+
+                    create_job_posts(job_title, job_post_time, job_description, job_url);
+                    console.log('-------------------------------------------------------------------------');
+                    console.log(job_post);
+
+                }
+ 
+                $('#jobs_container').html(job_post);
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+       
+
+    });
+
+
+});
+
+</script>
+ -->
+
+
+</body>
+</html>

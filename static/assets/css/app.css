@@ -1,0 +1,1197 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,600,700,800");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800,900");
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
+
+input#when {
+    text-transform: lowercase;
+}
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #9e95e0
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #9e95e0;
+}
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #9e95e0;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: #9e95e0;
+}
+
+/* line 3, ../sass/app.scss */
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Lato", sans-serif;
+}
+
+/* line 9, ../sass/app.scss */
+a {
+    outline: none;
+    text-decoration: none;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+/* line 13, ../sass/app.scss */
+a:hover {
+    outline: none;
+    text-decoration: none;
+}
+
+/* line 18, ../sass/app.scss */
+.no-margin {
+    margin: 0px !important;
+}
+
+/* line 21, ../sass/app.scss */
+.no-padding {
+    padding: 0px !important;
+}
+
+/* line 24, ../sass/app.scss */
+.no-border {
+    border: 0px !important;
+}
+
+/* line 27, ../sass/app.scss */
+.no-bg {
+    background-color: transparent !important;
+}
+
+/* line 30, ../sass/app.scss */
+.navbar-default {
+    background-color: transparent;
+    border-bottom: none;
+}
+
+/* line 34, ../sass/app.scss */
+#home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+}
+
+/* line 40, ../sass/app.scss */
+.home-section {
+    background-color: #f4e6e2;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    color: #FFF;
+}
+
+/* line 46, ../sass/app.scss */
+.home-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#008ec5, #008c29);
+    opacity: 0.9;
+}
+
+/* line 57, ../sass/app.scss */
+.navbar-default .navbar-nav > li > a {
+    font: 600 16px "Lato", sans-serif;
+    color: #FFF;
+    text-transform: capitalize;
+}
+
+/* line 63, ../sass/app.scss */
+.home-content select {
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    color: #001dfa;
+    outline: none;
+    text-transform: capitalize;
+}
+
+/* line 70, ../sass/app.scss */
+.home-content select option {
+    font: 700 20px "Lato", sans-serif;
+    color: #001dfa;
+}
+
+/* line 76, ../sass/app.scss */
+.home-content input {
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    color: #001dfa;
+    outline: none;
+    text-transform: capitalize;
+    width: 120px;
+}
+
+/* line 86, ../sass/app.scss */
+.home-content h1 {
+    font: 700 48px "Lato", sans-serif;
+    color: #9e95e0;
+}
+
+/* line 89, ../sass/app.scss */
+.home-content h1 span {
+    color: #001dfa;
+}
+
+/* line 93, ../sass/app.scss */
+.home-content p {
+    font: 400 18px "Lato", sans-serif;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* line 99, ../sass/app.scss */
+.menu-toggle .circle {
+    transition-duration: 0.8s;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: #fbe54b;
+    color: #001dfa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+/* line 110, ../sass/app.scss */
+.menu-toggle .circle .lines {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* line 115, ../sass/app.scss */
+.menu-toggle .circle i {
+    display: block;
+    height: 2px;
+    width: 100%;
+    margin-bottom: 5px;
+    background-color: #3b50aa;
+}
+
+/* line 122, ../sass/app.scss */
+.menu-toggle .circle:hover {
+    background-color: #3b50aa;
+}
+
+/* line 124, ../sass/app.scss */
+.menu-toggle .circle:hover i {
+    background-color: #FFF;
+}
+
+/* line 130, ../sass/app.scss */
+.logo {
+    display: inline-block;
+}
+
+/* line 132, ../sass/app.scss */
+.logo img {
+    max-width: 100px;
+}
+
+/* line 137, ../sass/app.scss */
+.lang-links ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* line 142, ../sass/app.scss */
+.lang-links li {
+    display: inline-block;
+    float: left;
+}
+
+/* line 145, ../sass/app.scss */
+.lang-links li a {
+    color: #001dfa;
+    font: 800 16px "Lato", sans-serif;
+    transition-duration: 0.8s;
+}
+
+/* line 149, ../sass/app.scss */
+.lang-links li a:hover {
+    color: #9e95e0;
+}
+
+/* line 152, ../sass/app.scss */
+.lang-links li a img {
+    max-height: 25px;
+}
+
+/* line 156, ../sass/app.scss */
+.lang-links li span {
+    display: block;
+    height: 15px;
+    width: 2px;
+    background-color: #001dfa;
+    margin: 0px 10px;
+}
+
+/* line 165, ../sass/app.scss */
+.job-section {
+    background-color: #f4e6e2;
+    border-top: #FFF solid 1px;
+}
+
+/* line 169, ../sass/app.scss */
+.job-section .nav-tabs div {
+    outline: none;
+}
+
+/* line 171, ../sass/app.scss */
+.job-section .nav-tabs div a {
+    text-transform: none;
+    outline: none;
+    display: block;
+    background-color: transparent;
+    border-radius: 0px;
+    border: none;
+    border-top: transparent solid 3px;
+    padding: 15px 0px;
+    text-align: center;
+}
+
+/* line 180, ../sass/app.scss */
+.job-section .nav-tabs div a:hover {
+    border-color: #001dfa;
+}
+
+/* line 184, ../sass/app.scss */
+.job-section .nav-tabs div a div {
+    text-align: left;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+/* line 189, ../sass/app.scss */
+.job-section .nav-tabs div a p {
+    color: #d1bfd3;
+    font: 400 14px "Lato", sans-serif;
+    margin-bottom: 5px;
+}
+
+/* line 193, ../sass/app.scss */
+.job-section .nav-tabs div a p strong {
+    color: #001dfa;
+    font: 700 16px "Lato", sans-serif;
+    margin-bottom: 15px;
+}
+
+/* line 202, ../sass/app.scss */
+.job-section .nav-tabs div.active a {
+    border-color: #001dfa;
+}
+
+/* line 204, ../sass/app.scss */
+.job-section .nav-tabs div.active a:hover {
+    background-color: transparent;
+    border: none;
+    border-top: #001dfa solid 3px;
+    color: #d1bfd3;
+}
+
+/* line 210, ../sass/app.scss */
+.job-section .nav-tabs div.active a:focus {
+    background-color: transparent;
+    border: none;
+    border-top: #001dfa solid 3px;
+    color: #d1bfd3;
+}
+
+/* line 222, ../sass/app.scss */
+.menu-links {
+    padding: 30px 0px;
+    min-height: 100%;
+    width: 100%;
+    background-color: rgba(0, 29, 250, 0.95);
+    position: absolute;
+    z-index: 100;
+    transition-duration: 1.5s;
+    left: -100%;
+}
+
+/* line 231, ../sass/app.scss */
+.menu-links.active {
+    left: 0;
+}
+
+/* line 234, ../sass/app.scss */
+.menu-links .container {
+    position: relative;
+}
+
+/* line 237, ../sass/app.scss */
+.menu-links .close-menu {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #FFF;
+    text-align: center;
+    background-color: #0f0df0;
+    width: 40px;
+    height: 40px;
+    padding-top: 11px;
+    border-radius: 50px;
+    z-index: 100;
+}
+
+/* line 249, ../sass/app.scss */
+.menu-links .close-menu:hover {
+    color: #333;
+}
+
+/* line 253, ../sass/app.scss */
+.menu-links ul.nav-tabs {
+    border: none;
+    margin-top: 50px;
+}
+
+/* line 256, ../sass/app.scss */
+.menu-links ul.nav-tabs li {
+    text-align: left;
+    margin: 10px 0px;
+    display: block;
+    width: 100%;
+}
+
+/* line 261, ../sass/app.scss */
+.menu-links ul.nav-tabs li a {
+    transition-duration: 0.5s;
+    display: inline-block;
+    color: #FFF;
+    font: 700 70px "Lato", sans-serif;
+    padding: 0;
+    border: none;
+    border-bottom: transparent solid 4px;
+    margin: 0px;
+}
+
+/* line 270, ../sass/app.scss */
+.menu-links ul.nav-tabs li a:hover {
+    color: #FFF;
+    background-color: transparent;
+    border-bottom-color: #FFF;
+}
+
+/* line 279, ../sass/app.scss */
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    background-color: transparent;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: #FFF solid 4px !important;
+}
+
+/* line 286, ../sass/app.scss */
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    color: #FFF;
+}
+
+/* line 289, ../sass/app.scss */
+.nav > li > a:focus, .nav > li > a:hover {
+    background-color: transparent;
+    border: none;
+    border-bottom-color: #FFF;
+}
+
+/* line 294, ../sass/app.scss */
+.logo-section {
+    padding: 15px;
+    background-color: #f4e6e2;
+    margin: 30px 0px;
+    border-radius: 3px;
+}
+
+/* line 299, ../sass/app.scss */
+.logo-section .pull-left {
+    padding: 5px 0px;
+    color: #001dfa;
+    font: 400 18px "Lato", sans-serif;
+}
+
+/* line 303, ../sass/app.scss */
+.logo-section .pull-left i {
+    padding-right: 15px;
+}
+
+/* line 308, ../sass/app.scss */
+.logo-section ul li {
+    display: inline-block;
+}
+
+/* line 310, ../sass/app.scss */
+.logo-section ul li a {
+    color: #FFF;
+    font-size: 26px;
+    transition-duration: 0.5s;
+    display: block;
+    margin: 0px 15px;
+}
+
+/* line 316, ../sass/app.scss */
+.logo-section ul li a:hover {
+    color: #001dfa;
+}
+
+/* line 324, ../sass/app.scss */
+.search-form input {
+    background-color: transparent;
+    width: 100%;
+    color: #001dfa;
+    font: 400 22px "Lato", sans-serif;
+    padding: 10px 15px;
+    float: left;
+    border: transparent solid 2px;
+}
+
+/* line 332, ../sass/app.scss */
+.search-form input:focus {
+    border-color: #001dfa;
+    border-radius: 3px;
+}
+
+/* line 337, ../sass/app.scss */
+.search-form button {
+    color: #001dfa;
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+    float: left;
+    max-width: 20px;
+    margin-left: -45px;
+    margin-top: 15px;
+    transition-duration: 0.5s;
+}
+
+/* line 347, ../sass/app.scss */
+.search-form button:hover {
+    color: #9e95e0;
+}
+
+/* line 353, ../sass/app.scss */
+.job-post .job-count {
+    text-decoration: none;
+    outline: none;
+    transition-duration: 0.5s;
+    display: block;
+    background-color: #f4e6e2;
+    margin: 30px 0px;
+    border-radius: 3px;
+    color: #001dfa;
+}
+
+/* line 362, ../sass/app.scss */
+.job-post .job-count:hover {
+    background-color: #001dfa;
+    color: #FFF;
+}
+
+/* line 365, ../sass/app.scss */
+.job-post .job-count:hover .job-title {
+    border-color: #FFF;
+}
+
+/* line 370, ../sass/app.scss */
+.job-post .job-title {
+    padding: 20px 15px;
+    border-bottom: #001dfa solid 1px;
+}
+
+/* line 373, ../sass/app.scss */
+.job-post .job-title h3 {
+    margin: 0px;
+    font: 400 24px "Lato", sans-serif;
+}
+
+/* line 376, ../sass/app.scss */
+.job-post .job-title h3 i {
+    cursor: pointer;
+    padding: 0px 5px;
+}
+
+/* line 380, ../sass/app.scss */
+.job-post .job-title h3 i:hover:before {
+    content: "\f004";
+}
+
+/* line 385, ../sass/app.scss */
+.job-post .job-title h3 i.liked:before {
+    content: "\f004";
+}
+
+/* line 391, ../sass/app.scss */
+.job-post .job-title span {
+    margin: 7px 0 0;
+    display: block;
+    font: 400 14px "Lato", sans-serif;
+}
+
+/* line 398, ../sass/app.scss */
+.job-description {
+    cursor: pointer;
+    padding: 20px 15px;
+}
+
+/* line 401, ../sass/app.scss */
+.job-description p {
+    margin: 0px;
+    font: 400 20px "Lato", sans-serif;
+    line-height: 33px;
+    overflow: hidden;
+    height: 66px;
+}
+
+/* line 407, ../sass/app.scss */
+.job-description p strong {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+/* line 413, ../sass/app.scss */
+.contact-section {
+    margin: 100px 0px;
+}
+
+/* line 415, ../sass/app.scss */
+.contact-section h3 {
+    text-align: center;
+    font: 800 24px "Lato", sans-serif;
+    color: #001dfa;
+    text-transform: capitalize;
+}
+
+/* line 421, ../sass/app.scss */
+.contact-section p {
+    text-align: center;
+    font: 300 24px "Lato", sans-serif;
+    color: #9e95e0;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+/* line 428, ../sass/app.scss */
+.contact-section .form-field {
+    margin: 15px 0px;
+    background-color: transparent;
+    outline: none;
+}
+
+/* line 432, ../sass/app.scss */
+.contact-section .form-field input {
+    background-color: #FFF;
+    border: #001dfa solid 1px;
+    border-radius: 40px;
+    text-align: center;
+    height: 55px;
+    font: 600 16px "Lato", sans-serif;
+    color: #001dfa;
+}
+
+/* line 441, ../sass/app.scss */
+.contact-section .form-field button {
+    background-color: #001dfa;
+    border: #001dfa solid 1px;
+    border-radius: 40px;
+    text-align: center;
+    display: block;
+    width: 100%;
+    height: 55px;
+    text-transform: uppercase;
+    transition-duration: 0.9s;
+    font: 300 18px "Lato", sans-serif;
+    color: #FFF;
+}
+
+/* line 453, ../sass/app.scss */
+.contact-section .form-field button:hover {
+    background-color: #666;
+    border-color: transparent;
+}
+
+/* line 461, ../sass/app.scss */
+.slick .slick-list.draggable {
+    width: calc(50% - 15px);
+    margin-right: 15px;
+    float: left;
+}
+
+/* line 466, ../sass/app.scss */
+.slick .slick-prev.slick-arrow {
+    display: none !important;
+}
+
+/* line 469, ../sass/app.scss */
+.slick .slick-next.slick-arrow {
+    outline: none;
+    width: calc(50% - 15px);
+    background-color: #001dfa;
+    border: #001dfa solid 1px;
+    border-radius: 40px;
+    text-align: center;
+    height: 55px;
+    text-transform: uppercase;
+    transition-duration: 0.9s;
+    font: 300 18px "Lato", sans-serif;
+    color: #FFF;
+    margin: 30px 0px 30px 15px;
+}
+
+/* line 482, ../sass/app.scss */
+.slick .slick-next.slick-arrow:hover {
+    background-color: #666;
+    border-color: transparent;
+}
+
+/* line 488, ../sass/app.scss */
+.slick .slick-dots {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* line 492, ../sass/app.scss */
+.slick .slick-dots li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+/* line 495, ../sass/app.scss */
+.slick .slick-dots li button {
+    background-color: #e5e5ff;
+    width: 10px;
+    height: 12px;
+    font-size: 0px;
+    border: none;
+    border-radius: 100%;
+    color: #e5e5ff;
+    transition-duration: 0.5s;
+    outline: none;
+}
+
+/* line 505, ../sass/app.scss */
+.slick .slick-dots li button:hover {
+    color: #001dfa;
+    background-color: #001dfa;
+}
+
+/* line 514, ../sass/app.scss */
+.slick .slick-active button {
+    background-color: #001dfa !important;
+    color: #001dfa !important;
+}
+
+/* line 521, ../sass/app.scss */
+.links-section {
+    margin: 100px 0px;
+}
+
+/* line 523, ../sass/app.scss */
+.links-section span {
+    width: 200px;
+    display: inline-block;
+    height: 2px;
+    background-color: #666;
+}
+
+/* line 529, ../sass/app.scss */
+.links-section h2 {
+    font: 800 40px "Lato", sans-serif;
+    color: #001dfa;
+}
+
+/* line 535, ../sass/app.scss */
+.job-slider .slick-prev.slick-arrow {
+    float: left;
+    top: 43%;
+    position: absolute;
+    left: -30px;
+    background-color: #001dfa;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 0;
+    border-radius: 50px;
+    outline: none;
+    color: #FFF;
+    transition-duration: 0.5s;
+}
+
+/* line 549, ../sass/app.scss */
+.job-slider .slick-prev.slick-arrow:hover {
+    background-color: #9e95e0;
+}
+
+/* line 552, ../sass/app.scss */
+.job-slider .slick-prev.slick-arrow:before {
+    content: "\f053";
+    text-align: center;
+    font: normal normal normal 14px/1 FontAwesome;
+}
+
+/* line 561, ../sass/app.scss */
+.job-slider .slick-next.slick-arrow {
+    float: right;
+    top: 43%;
+    position: absolute;
+    right: -30px;
+    background-color: #001dfa;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 0;
+    border-radius: 50px;
+    outline: none;
+    color: #FFF;
+    transition-duration: 0.5s;
+}
+
+/* line 575, ../sass/app.scss */
+.job-slider .slick-next.slick-arrow:hover {
+    background-color: #9e95e0;
+}
+
+/* line 578, ../sass/app.scss */
+.job-slider .slick-next.slick-arrow:before {
+    content: "\f054";
+    text-align: center;
+    font: normal normal normal 14px/1 FontAwesome;
+}
+
+/* line 588, ../sass/app.scss */
+.login-form h1 {
+    text-transform: uppercase;
+    color: #001dfa;
+    font: 900 28px "Lato", sans-serif;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+/* line 595, ../sass/app.scss */
+.login-form input {
+    background-color: transparent;
+    border: #001dfa solid 1px;
+    border-radius: 40px;
+    text-align: center;
+    height: 44px;
+    margin: 10px 0px;
+    font: 400 16px "Lato", sans-serif;
+    color: #333;
+    width: 100%;
+}
+
+/* line 606, ../sass/app.scss */
+.login-form button {
+    background-color: #001dfa;
+    border: #001dfa solid 1px;
+    border-radius: 40px;
+    text-align: center;
+    height: 44px;
+    margin: 10px 0px;
+    font: 400 16px "Lato", sans-serif;
+    color: #FFF;
+    text-transform: uppercase;
+    width: 100%;
+    transition-duration: 0.5s;
+}
+
+/* line 618, ../sass/app.scss */
+.login-form button:hover {
+    transition-duration: 0.5s;
+    background-color: #666;
+    border-color: transparent;
+}
+
+/* line 625, ../sass/app.scss */
+.account-links {
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 30px;
+}
+
+/* line 629, ../sass/app.scss */
+.account-links a {
+    display: block;
+    text-decoration: none;
+    outline: none;
+    color: #001dfa;
+    font: 400 14px "Lato", sans-serif;
+    margin: 5px 0px;
+}
+
+/* line 636, ../sass/app.scss */
+.account-links a:hover {
+    color: #666;
+}
+
+/* line 642, ../sass/app.scss */
+.register-form {
+    text-align: center;
+}
+
+/* line 644, ../sass/app.scss */
+.register-form input {
+    background-color: #FFF;
+    color: #333;
+    border: none;
+}
+
+/* line 649, ../sass/app.scss */
+.register-form .checkbox {
+    color: #666;
+    font: 400 14px "Lato", sans-serif;
+}
+
+/* line 652, ../sass/app.scss */
+.register-form .checkbox input {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin-top: 3px;
+}
+
+/* line 660, ../sass/app.scss */
+.register-form .account-links span {
+    color: #666;
+    display: block;
+    text-align: center;
+    font: 400 14px "Lato", sans-serif;
+}
+
+/* line 665, ../sass/app.scss */
+.register-form .account-links span a {
+    display: inline-block;
+}
+
+/* line 675, ../sass/app.scss */
+.job-search .search-title .job-title h3 {
+    color: #001dfa;
+}
+
+/* line 677, ../sass/app.scss */
+.job-search .search-title .job-title h3 strong {
+    font-weight: 700;
+}
+
+/* line 685, ../sass/app.scss */
+.job-search .job-post .job-count {
+    background-color: #001dfa;
+    color: #FFF;
+}
+
+/* line 688, ../sass/app.scss */
+.job-search .job-post .job-count .job-title {
+    border-color: #FFF;
+}
+
+/* line 691, ../sass/app.scss */
+.job-search .job-post .job-count:hover {
+    background-color: #333;
+}
+
+/* line 700, ../sass/app.scss */
+.job-detail .job-title h3 {
+    color: #001dfa;
+}
+
+/* line 703, ../sass/app.scss */
+.job-detail .job-title .pull-right {
+    color: #001dfa;
+}
+
+/* line 709, ../sass/app.scss */
+.job-details-content {
+    padding: 15px;
+}
+
+/* line 711, ../sass/app.scss */
+.job-details-content .job-text {
+    font: 400 15px "Lato", sans-serif;
+    color: #001dfa;
+    line-height: 30px;
+    margin: 15px 0px;
+}
+
+/* line 720, ../sass/app.scss */
+.action-button a {
+    display: inline-block;
+    padding: 8px 66px;
+    color: #FFF;
+    background-color: #001dfa;
+    border-radius: 30px;
+    text-decoration: none;
+    font: 400 22px "Lato", sans-serif;
+}
+
+/* line 728, ../sass/app.scss */
+.action-button a:hover {
+    background-color: #333;
+}
+
+/* line 734, ../sass/app.scss */
+.similar-text {
+    margin-top: 50px;
+    padding: 15px;
+    color: #001dfa;
+    font: 400 28px "Lato", sans-serif;
+}
+
+/* line 741, ../sass/app.scss */
+.social-links {
+    margin: 30px 0px;
+}
+
+/* line 743, ../sass/app.scss */
+.social-links a {
+    display: inline-block;
+    margin: 0 8px 0 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    border: #FFF solid 1px;
+    color: #FFF;
+    text-align: center;
+    padding-top: 11px;
+}
+
+/* line 753, ../sass/app.scss */
+.social-links a:hover {
+    background-color: #FFF;
+    color: #001dfa;
+}
+
+/* line 760, ../sass/app.scss */
+.quick-links {
+    margin-top: 30px;
+}
+
+/* line 762, ../sass/app.scss */
+.quick-links span {
+    display: inline-block;
+    text-align: left;
+    margin: 0 30px 0 0;
+    float: left;
+}
+
+/* line 768, ../sass/app.scss */
+.quick-links a {
+    display: block;
+    font: 400 13px "Lato", sans-serif;
+    color: #FFF;
+    margin: 8px 0;
+    text-transform: uppercase;
+}
+
+/* line 774, ../sass/app.scss */
+.quick-links a:hover {
+    color: #333;
+}
+
+/* line 780, ../sass/app.scss */
+.normal-text {
+    font: 400 16px "Lato", sans-serif;
+    color: #FFF;
+    line-height: 24px;
+    margin-bottom: 40px;
+}
+
+/* line 786, ../sass/app.scss */
+#about {
+    padding: 35% 0 0 0;
+}
+
+/* line 789, ../sass/app.scss */
+.contact-form {
+    margin-top: 20%;
+}
+
+/* line 791, ../sass/app.scss */
+.contact-form .form-group {
+    margin-bottom: 50px;
+}
+
+/* line 794, ../sass/app.scss */
+.contact-form label {
+    color: #FFF;
+    font: 700 16px "Lato", sans-serif;
+}
+
+/* line 798, ../sass/app.scss */
+.contact-form input {
+    background-color: transparent;
+    border: none;
+    border-bottom: #FFF solid 2px;
+    border-radius: 0px;
+    box-shadow: none;
+    height: 25px;
+    color: #FFF;
+    font: 700 16px "Lato", sans-serif;
+}
+
+/* line 808, ../sass/app.scss */
+.contact-form textarea {
+    margin-top: 8px;
+    background-color: #3f3efd;
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+    height: 150px;
+    color: #FFF;
+    font: 700 16px "Lato", sans-serif;
+}
+
+/* line 820, ../sass/app.scss */
+.submit-btn {
+    text-align: center;
+}
+
+/* line 822, ../sass/app.scss */
+.submit-btn button {
+    padding: 8px 35px;
+    border-radius: 20px;
+    border: #FFF solid 1px;
+    font: 700 16px "Lato", sans-serif;
+    background-color: transparent;
+    display: inline-block;
+    color: #FFF;
+}
+
+/* line 830, ../sass/app.scss */
+.submit-btn button:hover {
+    background-color: #FFF;
+    color: #001dfa;
+}
+
+/* line 5, ../../../../../../../Ruby23-x64/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../Ruby23-x64/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+    line-height: 1;
+}
+
+/* line 24, ../../../../../../../Ruby23-x64/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+    list-style: none;
+}
+
+/* line 26, ../../../../../../../Ruby23-x64/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../Ruby23-x64/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+    text-align: left;
+    font-weight: normal;
+    vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../Ruby23-x64/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+    quotes: none;
+}
+
+/* line 103, ../../../../../../../Ruby23-x64/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none;
+}
+
+/* line 32, ../../../../../../../Ruby23-x64/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+    border: none;
+}
+
+/* line 116, ../../../../../../../Ruby23-x64/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+    display: block;
+}
+
+@media (min-width: 767px) {
+    /* line 5, ../sass/_screen.scss */
+    .navbar {
+        padding: 20px 0;
+        -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+        transition: background .5s ease-in-out, padding .5s ease-in-out;
+    }
+
+    /* line 12, ../sass/_screen.scss */
+    .top-nav-collapse {
+        padding: 15px 0px;
+        background-color: #f4e6e2;
+    }
+}
+
+@media (max-width: 1058px) {
+    /* line 19, ../sass/_screen.scss */
+    .job-slider .slick-prev.slick-arrow {
+        left: -10px;
+    }
+
+    /* line 22, ../sass/_screen.scss */
+    .job-slider .slick-next.slick-arrow {
+        right: -10px;
+    }
+}
+
+@media (max-width: 992px) {
+    /* line 27, ../sass/_screen.scss */
+    .job-slider .slick-prev.slick-arrow {
+        left: -30px;
+    }
+
+    /* line 30, ../sass/_screen.scss */
+    .job-slider .slick-next.slick-arrow {
+        right: -30px;
+    }
+
+    /* line 34, ../sass/_screen.scss */
+    .job-section .container {
+        padding: 0px 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    /* line 40, ../sass/_screen.scss */
+    .home-section {
+        height: auto;
+    }
+}

@@ -15,8 +15,7 @@ from essentials.serializers import NewsletterSubscriptionSerializer
 
 
 def main_view(request):
-
-    return render(request, 'main.html', {})
+    return render(request, 'index.html', {})
 
 
 def search_view(request):

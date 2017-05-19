@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My First React Form</title>
+</head>
+<body>
+
+<div id="react-app">
+</div>
+
+<script src="assets/plugins/jquery/jquery-1.12.0.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/scrollreveal/dist/scrollreveal.min.js"></script>
+<script src="assets/plugins/slick/slick.min.js"></script>
+<script src="assets/js/app.js"></script>
+
+
+<script src="https://unpkg.com/react@15/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+
+<!-- Production 
+<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script> 
+-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/babel">
+
+    function create_job_posts(job_title, job_post_time, job_description, job_url) {
+        job_post = job_post + '<div class="job-post">' +
+                '<a href="' + job_url + '">' +
+                '<div class="job-title clearfix">' +
+                '<div class="pull-left">' +
+                '<h3>' + job_title + '</h3>' +
+                '</div>' +
+                '<div class="pull-right">' +
+                '<span>posted at ' + job_post_time + '</span>' +
+                '</div>' +
+                '</div>' +
+                '<div class="job-description">' +
+                '<p><strong>' + job_description + '</p>' +
+                '</div>' +
+                '</a>' +
+                '</div>';
+
+    }
+
+
+
+    class JobForm extends React.Component {
+
+        constructor(props) {
+            super(props);
+            this.handleInputChange = this.handleInputChange.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+        }
+
+        handleInputChange(event) {
+            this.props.handleInputChangeJob(event);
+        }
+
+        handleSubmit(event) {
+            event.preventDefault();
+            this.props.handleSubmitJob(event);
+        }
+
+        render() {
+            return (
+                    < form;
+            onSubmit = {this.handleSubmit
+        }
+
+    >
+    <
+        label
+    >
+        Name:;
+    <
+        input;
+        name = "name";
+        type = "text";
+        value = {this.props.name
+    } onChange = {this.handleInputChange} />
+    </label >
+    < label >
+    Email:
+    <input; name = "email"; type = "email"; value = {this.props.email} onChange = {this.handleInputChange} />
+    </label >
+    < label >
+    Description:
+    <input; name = "description"; type = "text"; value = {this.props.description} onChange = {this.handleInputChange} />
+    </label >
+    < input; type = "submit"; value = "Submit" / >
+            < / form >;
+    )
+    }
+    }
+
+    class Job extends React.Component {
+        render() {
+
+            return (
+                    < div;
+            className = "job-el" >
+                    {this.props.name
+        } {
+                this
+    .
+        props
+    .
+        email
+    }
+    {
+        this.props.description
+    }
+    </div >;
+    )
+    }
+    }
+
+
+    class JobsView extends React.Component {
+
+        constructor() {
+            super();
+            this.state = {
+                name: "fuddu",
+                email: "fuudu@gmail.com",
+                description: "Default Desc"
+            };
+            this.job_list = [{
+                key: 1,
+                name: "James K Nelson",
+                email: "james@jamesknelson.com",
+                description: "Front-end Unicorn"
+            },
+                {key: 2, name: "Jim", email: "jim@example.com"}];
+
+            this.handleInputChange = this.handleInputChange.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+        }
+
+        handleInputChange(event) {
+            const target = event.target;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
+            const name = target.name;
+
+            this.setState({
+                [name]: value
+            });
+
+        }
+
+        handleSubmit(event) {
+
+            console.log(this.state);
+            var server_address = "http://0.0.0.0:8000";
+            var final_url = server_address + "/search_jobs/?role=Developer";
+
+            $.ajax({
+                type: 'GET',
+                url: final_url,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (response) {
+
+                    console.log(response);
+                    console.log('-------------------------------------------------------------------------');
+                }
+            });
+        }
+
+        render() {
+
+            var job_rows = [];
+            for (var i = 0; i < 2; i++) {
+                job_rows.push( < Job;
+                key = {this.job_list[i].key
+            }
+            name = {this.job_list[i].name
+        }
+
+        email = {this.job_list[i].email
+    } description = {this.job_list[i].description}/>)
+    }
+
+    return (
+            < div >
+            < div; className = 'job-view' >
+            < div; className = 'title' >
+            < h1 > Jobs < / h1 >
+            < / div >
+
+            < div; className = 'jobs-list' >
+            {job_rows}
+
+            < / div >
+            < / div >
+
+            < div; className = 'job-form' >
+                //This line is responsible passing props to JobForm
+            < JobForm; name = {this.state.name} email = {this.state.email} description = {this.state.description} handleInputChangeJob = {this.handleInputChange} handleSubmitJob = {this.handleSubmit}/>
+    </div >
+    < / div >;
+    )
+    }
+    }
+
+
+
+
+    ReactDOM.render( < JobsView / >, document.getElementById("react-app"))
+</script>
+
+</body>
+</html>
