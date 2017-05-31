@@ -13,3 +13,5 @@ which returns a generator of all the data to be stored in ES as specified.
 
 Path to the ElasticSearch structure class should be specified in the Database under the same tuple. The stated class
 should be a child class of 'elastic_search.es_models.DataHead'.
+While creating an object of stated class, provide an optional argument 'encoding' (defaults to 'utf-8'). It is used to
+parse and store all the string data in ES.
