@@ -3,7 +3,6 @@ import traceback
 
 from elasticsearch_dsl.connections import connections
 from elasticsearch_dsl import Index
-from elasticsearch_dsl import FacetedSearch
 
 from admin_custom.models import ActivityLog
 from data.models import Source
@@ -88,11 +87,3 @@ def update_mappings():
         None, level='W', view_name='data.tasks.update_mappings',
         message='Forced ElasticSearch mapping update.'
     )
-
-
-class CustomSearch(FacetedSearch):
-    index = INDEX_NAME
-
-
-def search(search_arg):
-    return CustomSearch(search_arg).execute()

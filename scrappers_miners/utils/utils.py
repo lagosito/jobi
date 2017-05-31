@@ -2,7 +2,6 @@ import traceback
 import abc
 
 from polyglot.text import Text
-
 from admin_custom.models import ActivityLog
 from scrappers_miners.utils.settings import *
 
@@ -55,7 +54,7 @@ class APIHead(object):
     @abc.abstractmethod
     def execute(self):
         """
-        :returns list of items to be fed in ElasticSearch or a generator for the same.
+        :returns and sets 'self.data_iterator' to a list of items to be fed in ElasticSearch or a generator for the same.
         """
         raise NotImplementedError('Please implement this method in class "%s"' % self.__class__.__name__)
 
