@@ -5,8 +5,8 @@ class DuplicateHashError(Exception):
     message = "Duplicate hash detected in ElasticSearch DB. Hash already exists"
 
 
-def decode_from(value, enc='utf-8'):
-    return value.decode(enc, 'ignore').encode('ascii', 'ignore').decode('ascii')
+def decode_from(value):
+    return value.encode('ascii', 'ignore').decode('ascii')
 
 
 def get_res_count(es, hash_val):

@@ -2,7 +2,7 @@ import hashlib
 
 from elasticsearch.helpers import bulk
 
-from elasticsearch_dsl import DocType, Keyword, Text, Date
+from elasticsearch_dsl import DocType, Keyword, Text, Date, analyzer
 
 from elastic_search.es_core_config import create_connection
 from elastic_search.es_settings import INDEX_NAME
@@ -10,16 +10,22 @@ from elastic_search.utils import decode_from, check_duplicate, DuplicateHashErro
 
 es = create_connection()
 
+trigram = analyzer(
+    'trigram',
+    tokenizer="standard",
+    filter=["standard", "shingle"],
+)
+
 
 class DataHead(DocType):
     inhash = Keyword()
     source = Text()
     link = Text()
     msg = Text()
-    location = Text(multi=True)
+    location = Text(multi=True, analyzer=trigram)
     interest = Text()
-    job_type = Text()
-    role = Text()
+    job_type = Text(analyzer=trigram)
+    role = Text(analyzer=trigram)
     organisation = Text(multi=True)
     create_time = Date()
 
@@ -31,7 +37,6 @@ class DataHead(DocType):
         bulk(create_connection(), (d.to_dict(True) for d in docs))
 
     def __init__(self, *args, **kwargs):
-        enc = kwargs.pop('encoding', 'utf-8')
         block = {'val': ''}
 
         def validate(value):
@@ -42,7 +47,7 @@ class DataHead(DocType):
                 for val in value:
                     val = validate(val)
             else:
-                foo = decode_from(value, enc)
+                foo = decode_from(value)
                 block['val'] += foo
                 return foo
 
