@@ -57,10 +57,3 @@ $ python manage.py force_mine_source [source_name]
 ## Capable on runtime
 $ python manage.py force_mine_source_all
 
-
-
-# FIXME: seems obsolete. check with pranav
-## NLTK for mining. Run the command -
-$ python -m nltk.downloader all.
-## To ensure central installation, run the command
-$ sudo python -m nltk.downloader -d /usr/local/share/nltk_data all.
