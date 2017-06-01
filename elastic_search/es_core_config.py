@@ -2,6 +2,7 @@ from pydoc import locate
 import traceback
 
 from elasticsearch_dsl.connections import connections
+
 from elasticsearch_dsl import Index
 
 from admin_custom.models import ActivityLog
@@ -74,7 +75,9 @@ def create_mappings():
     client.indices.open(index=INDEX_NAME)
 
 
-# Avoid using following method as ES doesn't handle deletions in a mapping
+# Avoid using following method as ES doesn't handle deletions in a mapping and New(Changed on existing field)
+# analyzer will produce errors.
+# Only suitable for adding a new mapping or adding a new field in an existing mapping.
 def update_mappings():
     get_index()
     for source in Source.objects.all():
