@@ -1,8 +1,8 @@
 import hashlib
-import abc
 
 from elasticsearch.helpers import bulk
 from elasticsearch_dsl import DocType, Keyword, Text, Date, analyzer
+
 from elasticsearch_dsl.field import Completion
 
 from elastic_search.es_core_config import create_connection
@@ -53,9 +53,17 @@ class DataHead(DocType):
     def bulk_create(docs):
         bulk(create_connection(), (d.to_dict(True) for d in docs), chunk_size=CHUNK_SIZE)
 
-    @abc.abstractmethod
     def decode_from(self, value):
-        raise NotImplementedError('Please implement this method in class "%s"' % self.__class__.__name__)
+        """
+        Override this method in child class to decode data from a particular encoding.
+        """
+        return value
+
+    def _decode_from(self, value):
+        if value:
+            return self.decode_from(value).encode('ascii', 'ignore').decode('ascii')
+        else:
+            return ''
 
     def __init__(self, *args, **kwargs):
         block = {'val': ''}
@@ -68,7 +76,7 @@ class DataHead(DocType):
                 for val in value:
                     val = validate(val)
             else:
-                foo = self.decode_from(value)
+                foo = self._decode_from(value)
                 block['val'] += foo
                 return foo
 

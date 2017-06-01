@@ -16,9 +16,3 @@ class Facebook(DataHead):
     group_extra_data = Nested(
         properties=dict(map(lambda x: (x, Text()), group_detail_list))
     )
-
-    def decode_from(self, value):
-        if value:
-            return value.encode('ascii', 'ignore').decode('ascii')
-        else:
-            return ''
