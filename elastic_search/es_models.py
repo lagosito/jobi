@@ -3,10 +3,12 @@ import hashlib
 from elasticsearch.helpers import bulk
 
 from elasticsearch_dsl import DocType, Keyword, Text, Date, analyzer
+from elasticsearch_dsl.field import Completion
 
 from elastic_search.es_core_config import create_connection
 from elastic_search.es_settings import INDEX_NAME
-from elastic_search.utils import decode_from, check_duplicate, DuplicateHashError
+from elastic_search.utils import check_duplicate, DuplicateHashError
+import abc
 
 es = create_connection()
 
@@ -24,8 +26,8 @@ class DataHead(DocType):
     msg = Text()
     location = Text(multi=True, analyzer=trigram)
     interest = Text()
-    job_type = Text(analyzer=trigram)
-    role = Text(analyzer=trigram)
+    job_type = Completion()
+    role = Completion()
     organisation = Text(multi=True)
     create_time = Date()
 
@@ -35,6 +37,10 @@ class DataHead(DocType):
     @staticmethod
     def bulk_create(docs):
         bulk(create_connection(), (d.to_dict(True) for d in docs))
+
+    @abc.abstractmethod
+    def decode_from(self, value):
+        raise NotImplementedError('Please implement this method in class "%s"' % self.__class__.__name__)
 
     def __init__(self, *args, **kwargs):
         block = {'val': ''}
@@ -47,7 +53,7 @@ class DataHead(DocType):
                 for val in value:
                     val = validate(val)
             else:
-                foo = decode_from(value)
+                foo = self.decode_from(value)
                 block['val'] += foo
                 return foo
 

@@ -72,9 +72,9 @@ def suggestions(request):
         client = create_connection()
         s = Search(using=client, index=INDEX_NAME)
         if job_type:
-            s = s.suggest('job_type_suggestions', job_type, phrase={'field': 'job_type'})
+            s = s.suggest('job_type_suggestions', job_type, completion={'field': 'job_type'})
         if role:
-            s = s.suggest('role_suggestions', role, phrase={'field': 'role'})
+            s = s.suggest('role_suggestions', role, completion={'field': 'role'})
         if location:
             s = s.suggest('location_suggestions', location, phrase={'field': 'location'})
 
