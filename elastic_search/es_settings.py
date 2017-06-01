@@ -20,3 +20,5 @@ SCRAPPER_FOLDER_STRUCTURE = {
     'S': 'scrappers_miners.API_unstruct_data',
     'C': 'scrappers_miners.no_API'
 }
+
+CHUNK_SIZE = 10
