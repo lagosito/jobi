@@ -54,7 +54,9 @@ def get_mapping_class(source):
 
 
 def create_mappings():
+    client = create_connection()
     index = get_index()
+    client.indices.close(index=INDEX_NAME)
     for source in Source.objects.all():
         try:
             klass = get_mapping_class(source)
@@ -67,6 +69,7 @@ def create_mappings():
                 traceback=traceback.format_exc()
             )
             raise Exception(e)
+    client.indices.open(index=INDEX_NAME)
 
 
 # Avoid using following method as ES doesn't handle deletions in a mapping

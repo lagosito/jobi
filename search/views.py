@@ -74,9 +74,10 @@ def suggestions(request):
         if job_type:
             s = s.suggest('job_type_suggestions', job_type, phrase={'field': 'job_type'})
         if role:
-            s = s.suggest('role_suggestions', job_type, phrase={'field': 'role'})
+            s = s.suggest('role_suggestions', role, phrase={'field': 'role'})
         if location:
-            s = s.suggest('location_suggestions', job_type, phrase={'field': 'location'})
-        return JsonResponse(s.execute().to_dict())
+            s = s.suggest('location_suggestions', location, phrase={'field': 'location'})
+
+        return Response(s.execute().to_dict())
     else:
-        return JsonResponse({"status": "No data."}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"status": "No data."}, status=status.HTTP_400_BAD_REQUEST)

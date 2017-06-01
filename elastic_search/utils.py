@@ -6,7 +6,10 @@ class DuplicateHashError(Exception):
 
 
 def decode_from(value):
-    return value.encode('ascii', 'ignore').decode('ascii')
+    if value:
+        return value.encode('ascii', 'ignore').decode('ascii')
+    else:
+        return ''
 
 
 def get_res_count(es, hash_val):
