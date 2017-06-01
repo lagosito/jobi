@@ -1,11 +1,16 @@
 import csv
-import requests
 import time
+
+import requests
+
 from bs4 import BeautifulSoup
+
 from elastic_search.utils import DuplicateHashError
-from scrappers_miners.API_struct_data.xing.es_structure import Xing
+from scrappers_miners.no_API.xing.es_structure import Xing
 from scrappers_miners.utils.utils import APIHead
 from src import settings
+
+# FIXME: do not import from outside the module(except from elastic_search), Example us relative path from current file
 
 count = 0
 
@@ -108,6 +113,7 @@ def yield_scrap_result(job_role, job_url):
             yield job
 
 
+# FIXME : handle errors
 def start(job_roles, base_url):
     for index, job_role in enumerate(job_roles):
         complete_url = base_url + job_role + '&sort=date'

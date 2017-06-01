@@ -1,4 +1,4 @@
-from elasticsearch_dsl.field import Text
+from elasticsearch_dsl import Text
 
 from elastic_search.es_models import DataHead
 
