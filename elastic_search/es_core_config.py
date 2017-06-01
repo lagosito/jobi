@@ -8,10 +8,12 @@ from admin_custom.models import ActivityLog
 from data.models import Source
 from es_settings import *
 
+ES_CONNECTION = connections.create_connection(**DATABASE_CONNECTION_INFO)
+
 
 def create_connection():
     try:
-        return connections.create_connection(**DATABASE_CONNECTION_INFO)
+        return ES_CONNECTION
     except Exception as e:
         ActivityLog.objects.create_log(
             None, level='C', view_name='elastic_search.es_core_config.create_connection',

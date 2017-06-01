@@ -1,16 +1,14 @@
 import hashlib
+import abc
 
 from elasticsearch.helpers import bulk
-
 from elasticsearch_dsl import DocType, Keyword, Text, Date, analyzer
 from elasticsearch_dsl.field import Completion
 
 from elastic_search.es_core_config import create_connection
 from elastic_search.es_settings import INDEX_NAME
 from elastic_search.utils import check_duplicate, DuplicateHashError
-import abc
 
-es = create_connection()
 
 trigram = analyzer(
     'trigram',
@@ -36,7 +34,7 @@ class DataHead(DocType):
 
     @staticmethod
     def bulk_create(docs):
-        bulk(create_connection(), (d.to_dict(True) for d in docs))
+        bulk(create_connection(), (d.to_dict(True) for d in docs), chunk_size=10)
 
     @abc.abstractmethod
     def decode_from(self, value):
@@ -61,7 +59,7 @@ class DataHead(DocType):
 
         kwargs['inhash'] = hashlib.sha512(block['val']).hexdigest()
 
-        if check_duplicate(es, kwargs['inhash']):
+        if check_duplicate(create_connection(), kwargs['inhash']):
             super(DataHead, self).__init__(*args, **kwargs)
         else:
             raise DuplicateHashError
