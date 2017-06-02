@@ -43,7 +43,7 @@ def search_job_api(request):
     start = int(request.GET.get('start', 0))
     end = int(request.GET.get('end', 10000))
 
-    if not (0 > start > end):
+    if start < 0 or end < 0 or start > end:
         return Response("Illegal Arguments", status=400)
 
     role = request.GET.get('role', "")
@@ -71,6 +71,7 @@ def suggestions(request):
     if any([role, location, job_type]):
         client = create_connection()
         s = Search(using=client, index=INDEX_NAME)
+        s = s.source(False)
         if job_type:
             s = s.suggest(
                 'job_type_suggestions',
