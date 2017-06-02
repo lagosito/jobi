@@ -77,22 +77,21 @@ def yield_scrap_result(job_role, job_url):
 
         for index, job_attributes_selector in enumerate(job_attributes_selectors):
             if index == 3:
-                job_attributes.append(job_attributes_selector[0].get('datetime').encode(
-                    'utf-8')) if job_attributes_selector else job_attributes.append(None)
+                job_attributes.append(unicode(
+                    job_attributes_selector[0].get('datetime'))) if job_attributes_selector else job_attributes.append(
+                    None)
             elif index == 8:
-                job_attributes.append("https://www.xing.com" + job_attributes_selector[0].get('href').encode(
-                    'utf-8')) if job_attributes_selector else job_attributes.append(None)
+                job_attributes.append(unicode("https://www.xing.com" + job_attributes_selector[0].get(
+                    'href'))) if job_attributes_selector else job_attributes.append(None)
             elif index == 5:
                 if job_attributes_selector:
-                    career_level = job_attributes_selector[0].text.strip(' \t\n\rCareer level:').encode('utf-8')
+                    career_level = unicode(job_attributes_selector[0].text.strip(' \t\n\rCareer level:'))
                     job_attributes.append(career_level)
                 else:
                     job_attributes.append(None)
             else:
                 job_attributes.append(
-                    job_attributes_selector[0].text.encode(
-                        'utf-8')) if job_attributes_selector else job_attributes.append(
-                    None)
+                    unicode(job_attributes_selector[0].text)) if job_attributes_selector else job_attributes.append(None)
 
         count += 1
         print '%d Entries Scraped' % count

@@ -59,7 +59,7 @@ class DataHead(DocType):
 
     def _decode_from(self, value):
         if value:
-            return self.decode_from(value).encode('ascii', 'ignore').decode('ascii')
+            return value.encode('utf-8')
         else:
             return ''
 
@@ -76,7 +76,7 @@ class DataHead(DocType):
             else:
                 foo = self._decode_from(value)
                 block['val'] += foo
-                return foo
+                return value
 
         validate(kwargs)
 
