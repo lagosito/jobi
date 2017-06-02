@@ -1,22 +1,20 @@
 import csv
 import time
+import os
 
 import requests
 
 from bs4 import BeautifulSoup
 
-from elastic_search.utils import DuplicateHashError
+from elastic_search.utils import DuplicateHashError, DuplicateDataError
 from scrappers_miners.no_API.xing.es_structure import Xing
 from scrappers_miners.utils.utils import APIHead
-from src import settings
-
-# FIXME: do not import from outside the module(except from elastic_search), Example us relative path from current file
 
 count = 0
 
 
 def create_job_role_list():
-    data_file_path = settings.BASE_DIR + '/scrappers_miners/API_struct_data/xing/job_role.csv'
+    data_file_path = os.path.dirname(os.path.abspath(__file__)) + '/job_role.csv'
     data_file = open(data_file_path, 'r')
     reader = csv.reader(data_file)
     for row in reader:
@@ -55,65 +53,74 @@ def calculate_no_of_pages(soup):
 
 def yield_scrap_result(job_role, job_url):
     global count
-    job_attributes = []
-    r = request_url(job_url)
-    soup = BeautifulSoup(r.content, 'html.parser')
-    title_selector = soup.select("#job-posting-header > h1 > strong")
-    company_selector = soup.select("#job-posting-header > h2 > a.b-link.job-posting-header-company")
-    location_selector = soup.select("#job-posting-header > h2 > a.b-link.regular.job-posting-header-city")
-    date_selector = soup.select("#job-posting-header > ul > li:nth-of-type(1) > time")
-    job_type_selector = soup.select("#job-posting-header > ul > li:nth-of-type(2) > span > a")
-    career_level_selector = soup.select("#job-posting-header > ul > li:nth-of-type(3)")
-    industry_selector = soup.select("#job-posting-header > ul > li:nth-of-type(4) > a")
-    description_selector = soup.select("#job-posting-description > div > div")
-    url_selector = soup.select("#maincontent > div > div > ul > li:nth-of-type(4) > a")
-    next_job_selector = soup.select('.nroute.prev-next-posting.next-posting.foundation-col-6')
-    job_attributes_selectors = [title_selector, company_selector, location_selector,
-                                date_selector, job_type_selector, career_level_selector,
-                                industry_selector, description_selector, url_selector]
 
-    for index, job_attributes_selector in enumerate(job_attributes_selectors):
-        if index == 3:
-            job_attributes.append(job_attributes_selector[0].get('datetime').encode(
-                'utf-8')) if job_attributes_selector else job_attributes.append(None)
-        elif index == 8:
-            job_attributes.append("https://www.xing.com" + job_attributes_selector[0].get('href').encode(
-                'utf-8')) if job_attributes_selector else job_attributes.append(None)
-        elif index == 5:
-            if job_attributes_selector:
-                career_level = job_attributes_selector[0].text.strip(' \t\n\rCareer level:').encode('utf-8')
-                job_attributes.append(career_level)
+    url = job_url
+
+    while True:
+
+        job_attributes = []
+        r = request_url(url)
+        soup = BeautifulSoup(r.content, 'html.parser')
+        title_selector = soup.select("#job-posting-header > h1 > strong")
+        company_selector = soup.select("#job-posting-header > h2 > a.b-link.job-posting-header-company")
+        location_selector = soup.select("#job-posting-header > h2 > a.b-link.regular.job-posting-header-city")
+        date_selector = soup.select("#job-posting-header > ul > li:nth-of-type(1) > time")
+        job_type_selector = soup.select("#job-posting-header > ul > li:nth-of-type(2) > span > a")
+        career_level_selector = soup.select("#job-posting-header > ul > li:nth-of-type(3)")
+        industry_selector = soup.select("#job-posting-header > ul > li:nth-of-type(4) > a")
+        description_selector = soup.select("#job-posting-description > div > div")
+        url_selector = soup.select("#maincontent > div > div > ul > li:nth-of-type(4) > a")
+        next_job_selector = soup.select('.nroute.prev-next-posting.next-posting.foundation-col-6')
+        job_attributes_selectors = [title_selector, company_selector, location_selector,
+                                    date_selector, job_type_selector, career_level_selector,
+                                    industry_selector, description_selector, url_selector]
+
+        for index, job_attributes_selector in enumerate(job_attributes_selectors):
+            if index == 3:
+                job_attributes.append(job_attributes_selector[0].get('datetime').encode(
+                    'utf-8')) if job_attributes_selector else job_attributes.append(None)
+            elif index == 8:
+                job_attributes.append("https://www.xing.com" + job_attributes_selector[0].get('href').encode(
+                    'utf-8')) if job_attributes_selector else job_attributes.append(None)
+            elif index == 5:
+                if job_attributes_selector:
+                    career_level = job_attributes_selector[0].text.strip(' \t\n\rCareer level:').encode('utf-8')
+                    job_attributes.append(career_level)
+                else:
+                    job_attributes.append(None)
             else:
-                job_attributes.append(None)
+                job_attributes.append(
+                    job_attributes_selector[0].text.encode(
+                        'utf-8')) if job_attributes_selector else job_attributes.append(
+                    None)
+
+        count += 1
+        print '%d Entries Scraped' % count
+
+        try:
+            yield Xing(
+                source="Xing",
+                role=job_role,
+                job_title=job_attributes[0],
+                organisation=job_attributes[1] if job_attributes[1] else [],
+                location=job_attributes[2] if job_attributes[2] else [],
+                create_time=job_attributes[3],
+                job_type=job_attributes[4],
+                career_level=job_attributes[5],
+                industry=job_attributes[6],
+                msg=job_attributes[7],
+                link=job_attributes[8]
+            )
+        except DuplicateHashError:
+            print 'Duplicate Hash in %s' % job_role
+            pass
+
+        if next_job_selector:
+            url = "https://xing.com/jobs/" + next_job_selector[0].get('data-nroute')[14:].rstrip('"]')
         else:
-            job_attributes.append(
-                job_attributes_selector[0].text.encode('utf-8')) if job_attributes_selector else job_attributes.append(
-                None)
-
-    count += 1
-    print '%d Entries Scraped' % count
-
-    yield Xing(
-        source="Xing",
-        role=job_role,
-        job_title=job_attributes[0],
-        organisation=job_attributes[1],
-        location=job_attributes[2],
-        create_time=job_attributes[3],
-        job_type=job_attributes[4],
-        career_level=job_attributes[5],
-        industry=job_attributes[6],
-        description=job_attributes[7],
-        link=job_attributes[8]
-    )
-
-    if next_job_selector:
-        next_job_url = "https://xing.com/jobs/" + next_job_selector[0].get('data-nroute')[14:].rstrip('"]')
-        for job in yield_scrap_result(job_role, next_job_url):
-            yield job
+            break
 
 
-# FIXME : handle errors
 def start(job_roles, base_url):
     for index, job_role in enumerate(job_roles):
         complete_url = base_url + job_role + '&sort=date'
@@ -125,8 +132,8 @@ def start(job_roles, base_url):
             try:
                 for job in yield_scrap_result(job_role, first_job_url):
                     yield job
-            except DuplicateHashError:
-                print 'Hash Collision - Skipping %s' % job_role
+            except DuplicateDataError:
+                print 'Data Collision - Skipping %s' % job_role
                 continue
 
 

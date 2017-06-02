@@ -34,17 +34,9 @@ class DataHead(DocType):
     organisation = Text(multi=True)
     create_time = Date()
 
-    _error_count = 0
-
     COLLISION_LIMIT = CHUNK_SIZE
 
-    def get_error_count(self):
-        return self._error_count
-
-    def set_error_count(self, val):
-        self._error_count = val
-
-    error_count = property(get_error_count, set_error_count)
+    error_count = 0
 
     class Meta:
         index = INDEX_NAME
@@ -91,10 +83,10 @@ class DataHead(DocType):
         kwargs['inhash'] = hashlib.sha512(block['val']).hexdigest()
 
         if check_duplicate(create_connection(), kwargs['inhash']):
+            self.__class__.error_count = 0
             super(DataHead, self).__init__(*args, **kwargs)
         else:
-            self.error_count += 1
-            if self.error_count == self.get_collision_limit():
-                self.error_count = 0
+            self.__class__.error_count += 1
+            if self.__class__.error_count >= self.get_collision_limit():
                 raise DuplicateDataError
             raise DuplicateHashError
