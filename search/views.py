@@ -78,7 +78,8 @@ def suggestions(request):
                 job_type,
                 completion={
                     'field': 'job_type.suggester',
-                    "fuzzy": {}
+                    "fuzzy": {},
+                    'size': 20
                 }
             )
         if role:
@@ -87,7 +88,8 @@ def suggestions(request):
                 role,
                 completion={
                     'field': 'role.suggester',
-                    "fuzzy": {}
+                    "fuzzy": {},
+                    'size': 20
                 }
             )
         if location:
@@ -95,11 +97,22 @@ def suggestions(request):
                 'location_suggestions',
                 location,
                 completion={
-                    'field': 'role.suggester',
-                    "fuzzy": {}
+                    'field': 'location.suggester',
+                    "fuzzy": {},
+                    'size': 20
                 }
             )
-
-        return Response(s.execute().to_dict())
+        suggestion_res = s.execute().to_dict()['suggest']
+        fin_res = {}
+        for res in suggestion_res.keys():
+            options = []
+            for option in suggestion_res[res][0]['options']:
+                options.append(option['text'])
+            options = list(set(options))
+            foo = []
+            for val in options:
+                foo.append({'value': val, 'data':val})
+            fin_res.update({res: foo})
+        return Response(fin_res)
     else:
         return Response({"status": "No data."}, status=status.HTTP_400_BAD_REQUEST)
