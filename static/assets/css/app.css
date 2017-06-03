@@ -15,28 +15,32 @@
     min-width: 230px;
 }
 
+input::-webkit-calendar-picker-indicator {
+  display: none;
+} 
+
 input#when {
     text-transform: lowercase;
 }
 
 ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
-    color: #001dfa;
+    color: #d1bfd3
 }
 
 ::-moz-placeholder {
     /* Firefox 19+ */
-    color: #001dfa;
+    color: #d1bfd3
 }
 
 :-ms-input-placeholder {
     /* IE 10+ */
-    color: #001dfa;
+    color: #d1bfd3
 }
 
 :-moz-placeholder {
     /* Firefox 18- */
-    color: #001dfa;
+    color: #d1bfd3
 }
 
 /* line 3, ../sass/app.scss */
