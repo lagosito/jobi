@@ -1,5 +1,4 @@
 import hashlib
-
 from elasticsearch.helpers import bulk
 
 from elasticsearch_dsl import DocType, Keyword, Text, Date, Completion
@@ -51,17 +50,16 @@ class DataHead(DocType):
     def bulk_create(docs):
         bulk(create_connection(), (d.to_dict(True) for d in docs), chunk_size=CHUNK_SIZE)
 
-    def decode_from(self, value):
-        """
-        Override this method in child class to decode data from a particular encoding.
-        """
-        return value
+    @staticmethod
+    def _encode_for_hash(value):
+        return value.encode('utf-8')
 
-    def _decode_from(self, value):
-        if value:
-            return value.encode('utf-8')
-        else:
-            return ''
+    @staticmethod
+    def _decode(value):
+        try:
+            return unicode(value, 'utf-8', 'ignore')
+        except TypeError:
+            return value
 
     def __init__(self, *args, **kwargs):
         block = {'val': ''}
@@ -74,8 +72,9 @@ class DataHead(DocType):
                 for val in value:
                     val = validate(val)
             else:
-                foo = self._decode_from(value)
-                block['val'] += foo
+                if value:
+                    value = self._decode(value)
+                    block['val'] += self._encode_for_hash(value)
                 return value
 
         validate(kwargs)
