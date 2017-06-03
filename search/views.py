@@ -43,7 +43,7 @@ def search_job_api(request):
     start = int(request.GET.get('start', 0))
     end = int(request.GET.get('end', 10000))
 
-    if start < 0 or end < 0 or start > end:
+    if not (0 <= start < end):
         return Response("Illegal Arguments", status=400)
 
     role = request.GET.get('role', "")
