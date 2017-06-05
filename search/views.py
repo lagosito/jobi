@@ -41,7 +41,7 @@ def recent_jobs_api(request):
 @api_view(['GET'])
 def search_job_api(request):
     start = int(request.GET.get('start', 0))
-    end = int(request.GET.get('end', 10000))
+    end = int(request.GET.get('end', 100))
 
     if not (0 <= start < end):
         return Response("Illegal Arguments", status=400)
