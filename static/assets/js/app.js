@@ -75,6 +75,8 @@ $(function () {
     $("#search_jobs_section").hide();
     $("#jobs_section").hide();
     $("#contact_section").hide();
+    $("#main-footer").hide();
+
 
 
     var job_post = '';
@@ -303,6 +305,8 @@ $(function () {
                 $("#search_jobs_section").show();
                 $("#jobs_section").show();
                 $("#contact_section").show();
+                $("#main-footer").show();
+
 
                 job_posts_entries = response['hits']['hits'];
 
