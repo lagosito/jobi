@@ -1280,6 +1280,43 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 
 @media (min-width: 2200px) {
 
+  .lang-links li a{
+   font: 800 48px "Lato", sans-serif;
+  }
+
+  .lang-links li span{
+    height: 40px;
+    width: 5px;
+  }
+
+  .menu-toggle .circle{
+    width: 100px;
+    height: 100px;
+  }
+
+  .logo img {
+    max-width: 200px;
+}
+
+    .home-content h1 {
+    font-size: 150px;
+  }
+
+  /* line 62, ../sass/_screen.scss */
+  #keyword {
+    width: 830px;
+  }
+
+  /* line 65, ../sass/_screen.scss */
+  #location {
+    width: 590px;
+  }
+
+  /* line 68, ../sass/_screen.scss */
+  #job_type {
+    width: 734px;
+  }
+
     .menu-links ul.nav-tabs li a {
   font: 900 300px "Lato", sans-serif;
   border-bottom: transparent solid 16px;
