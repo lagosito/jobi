@@ -8,5 +8,3 @@ class Xing(DataHead):
     career_level = Text()
     industry = Text()
 
-    def decode_from(self, value):
-        return value.decode('utf-8', 'ignore')
