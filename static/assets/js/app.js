@@ -331,8 +331,8 @@ $(function () {
 
 
                 job_title = recent_job_posts_entries[i]['_source']['job_title'];
-                if (job_title.length > 20)
-                            job_title = job_title.substr(0,20) + '...';
+                if (typeof job_title !== "undefined" && job_title.length > 20)
+                        job_title = job_title.substr(0,20) + '...';
                 job_url = recent_job_posts_entries[i]['_source']['link'];
                 job_post_time = recent_job_posts_entries[i]['_source']['create_time'];
                 var local_time = new Date(job_post_time);
@@ -343,6 +343,8 @@ $(function () {
                 });
 
                 organization = recent_job_posts_entries[i]['_source']['organisation'];
+                if (typeof organization !== "undefined" && organization.length > 20)
+                        organization = organization.substr(0,20) + '...';
                 job_location = recent_job_posts_entries[i]['_source']['location'];
 
 
@@ -496,7 +498,7 @@ $(function () {
                           }
 
                         job_title = job_posts_entries[i]['_source']['job_title'];
-                        if (job_title.length > 20)
+                        if (typeof job_title !== "undefined" && job_title.length > 20)
                             job_title = job_title.substr(0,20) + '...';
 
 
@@ -504,12 +506,12 @@ $(function () {
 
                         job_description = job_posts_entries[i]['_source']['msg'];
                         job_description2 = '';
-                        if ((job_description.length > 100) && (job_description.length < 3000)){
+                        if ((typeof organization !== "undefined") && (job_description.length > 100) && (job_description.length < 3000)){
                             job_description = job_description.substr(0, job_description.length/2) + '...';
                             job_description2 = job_description.substr((job_description.length/2) + 1 ,job_description.length - 1 ) ;
                         }
 
-                        else if((job_description.length < 3000)){
+                        else if((typeof organization !== "undefined") && (job_description.length < 3000)){
                             job_description = job_description.substr(0, job_description.length/2) + '...';
                             job_description2 = job_description.substr((job_description.length/2) + 1 ,job_description.length - 1 ) + '...';
                         }
