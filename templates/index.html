@@ -20,10 +20,10 @@
 
 <!--========== Header Area ==========-->
 <div class="menu-links">
-    <div class="container">
+    <div class="col-md-12 col-lg-12">
         <a href="javascript:;" class="close-menu"><i class="fa fa-times"></i> </a>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-md-offset-1 col-lg-offset-1 col-md-5 col-lg-5">
                 <ul class="nav nav-tabs">
                     <li>
                         <a href="#about" data-toggle="tab">About</a>
@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-md-offset-1 col-lg-offset-1 col-md-5 col-lg-5">
                 <div class="tab-content">
                     <div class="tab-pane active">
                         <img src="/static/assets/images/big_logo.png" class="img-responsive" alt="">
@@ -80,12 +80,12 @@
                                </div>
 
                                <div class="form-group">
-                                   <label>Your eMail</label>
+                                   <label>MESSAGE</label>
                                    <textarea class="form-control"></textarea>
                                </div>
 
                                <div class="text-center submit-btn">
-                                   <button type="submit">Submit</button>
+                                   <button type="submit">SUBMIT</button>
                                </div>
 
                            </form>
@@ -101,7 +101,6 @@
     <nav class="navbar navbar-default">
         <div class="container col-lg-12">
             <div class="col-lg-12">
-
                 <div class="header-content text-center">
                     <div class="pull-left">
                         <div class="menu-toggle">
@@ -111,11 +110,8 @@
                                     <i></i>
                                     <i class="no-margin"></i>
                                 </div>
-
-
                             </a>
                         </div>
-
                     </div>
                     <div class="logo">
                         <img src="/static/assets/images/logo.jpg"/>
@@ -131,15 +127,14 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </nav>
     <div id="home">
-        <div class="container text-center">
+        <div class="col-lg-12 text-center">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="home-content">
-                    <form action="" method="POST" id ="job_search_form">
+                    <form action="" method="GET" id ="job_search_form">
 
                          <h1>I'm an
                             <input id = "keyword" type="text" placeholder="Art Director" required value="" list="role-datalist" />
@@ -184,10 +179,7 @@
             </div> -->
             <ul class="list-unstyled pull-right">
                 <li><a href="#"><i class="fa fa-facebook"></i> </a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i> </a></li>
-                <li><a href="#"><i class="fa fa-google"></i> </a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i> </a></li>
-                <li><a href="#"><i class="fa fa-vimeo"></i> </a></li>
+                <li><a href="#"><i class="fa fa-xing"></i> </a></li>
             </ul>
 
         </div>
@@ -267,6 +259,8 @@
     </div>
 
 </footer>
+
+<div id="all_modal"></div>
 
 
 <script src="/static/assets/plugins/jquery/jquery-1.12.0.min.js"></script>
