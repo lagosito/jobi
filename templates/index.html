@@ -10,17 +10,20 @@
     <link rel="stylesheet" type="text/css" href="/static/assets/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/static/assets/plugins/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="/static/assets/css/app.css">
+<style>
+
+
+</style>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="230">
 
 
 <!--========== Header Area ==========-->
 <div class="menu-links">
-    <div class="container">
-        <a href="javascript:" class="close-menu"><i class="fa fa-times"></i> </a>
-
+    <div class="col-md-12 col-lg-12">
+        <a href="javascript:;" class="close-menu"><i class="fa fa-times"></i> </a>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-md-offset-1 col-lg-offset-1 col-md-5 col-lg-5">
                 <ul class="nav nav-tabs">
                     <li>
                         <a href="#about" data-toggle="tab">About</a>
@@ -47,50 +50,46 @@
                 </div>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-md-offset-1 col-lg-offset-1 col-md-5 col-lg-5">
                 <div class="tab-content">
                     <div class="tab-pane active">
                         <img src="/static/assets/images/big_logo.png" class="img-responsive" alt="">
                     </div>
                     <div class="tab-pane" id="about">
                         <p class="normal-text">
-                            Businesses that partner with Google come in all shapes, sizes and market caps, and no one
-                            Google advertising solution works for all.
+                            Businesses that partner with Google come in all shapes, sizes and market caps, and no one Google advertising solution works for all.
                         </p>
-
                         <p class="normal-text">
-                            Your knowledge of o our range of product offerings can grow their business. Working with
-                            them, you set the vision and the strategy for how their advertising can reach thousands of
-                            users.
+                            Your knowledge of o our range of product offerings can grow their business. Working with them, you set the vision and the strategy for how their advertising can reach thousands of users.
 
                             Lea
                         </p>
                     </div>
 
                     <div class="tab-pane" id="contact">
-                        <div class="contact-form">
-                            <form action="">
-                                <div class="form-group">
-                                    <label>Your Name</label>
-                                    <input type="text" class="form-control"/>
-                                </div>
+                       <div class="contact-form">
+                           <form action="">
+                               <div class="form-group">
+                                   <label>Your Name</label>
+                                   <input type="text" class="form-control"/>
+                               </div>
 
-                                <div class="form-group">
-                                    <label>Your eMail</label>
-                                    <input type="text" class="form-control"/>
-                                </div>
+                               <div class="form-group">
+                                   <label>Your eMail</label>
+                                   <input type="text" class="form-control"/>
+                               </div>
 
-                                <div class="form-group">
-                                    <label>Your eMail</label>
-                                    <textarea class="form-control"></textarea>
-                                </div>
+                               <div class="form-group">
+                                   <label>MESSAGE</label>
+                                   <textarea class="form-control"></textarea>
+                               </div>
 
-                                <div class="text-center submit-btn">
-                                    <button type="submit">Submit</button>
-                                </div>
+                               <div class="text-center submit-btn">
+                                   <button type="submit">SUBMIT</button>
+                               </div>
 
-                            </form>
-                        </div>
+                           </form>
+                       </div>
                     </div>
                 </div>
             </div>
@@ -100,66 +99,58 @@
 <!-- Intro Section -->
 <section class="home-section">
     <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="header-content text-center">
-                <div class="pull-left">
-                    <div class="menu-toggle">
-                        <a class="circle" href="#">
-                            <div class="lines">
-                                <i></i>
-                                <i></i>
-                                <i class="no-margin"></i>
-                            </div>
-
-
-                        </a>
+        <div class="container col-lg-12">
+            <div class="col-lg-12">
+                <div class="header-content text-center">
+                    <div class="pull-left">
+                        <div class="menu-toggle">
+                            <a class="circle" href="#">
+                                <div class="lines">
+                                    <i></i>
+                                    <i></i>
+                                    <i class="no-margin"></i>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-
-                </div>
-                <div class="logo">
-                    <img src="/static/assets/images/logo.jpg"/>
-                </div>
-                <div class="pull-right">
-                    <div class="lang-links">
-                        <ul class="list-unstyled">
-                            <li><a href="#">DE</a></li>
-                            <li><span></span></li>
-                            <li><a href="#">EN</a></li>
-                        </ul>
+                    <div class="logo">
+                        <img src="/static/assets/images/logo.jpg"/>
+                    </div>
+                    <div class="pull-right">
+                        <div class="lang-links">
+                            <ul class="list-unstyled">
+                                <li><a href="#">DE</a></li>
+                                <li><span></span></li>
+                                <li><a href="#">EN</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </nav>
     <div id="home">
-        <div class="container text-center">
+        <div class="col-lg-12 text-center">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="home-content">
-                        <form action="" method="POST" id="job_search_form">
+                    <form action="" method="GET" id ="job_search_form">
 
-                            <h1>I'm an
-                                <select id="keyword">
-                                    <option value="Art Director">Art Director</option>
-                                    <option value="Director">Director</option>
-                                    <option value="Developer">Developer</option>
-                                </select>
-                                <br>looking for a job in
-                                <select id="location">
-                                    <option value="London">London</option>
-                                    <option value="Berlin">Berlin</option>
-                                    <option value="Milan">Milan</option>
-                                </select><br>as a
-                                <select id="job_type"><br>
-                                    <option value="Freelancer">freelancer</option>
-                                    <option value="Full Time">Full time</option>
-                                    <option value="Part time">Part time</option>
-                                    <option value="Internship">Internship</option>
-                                </select>
-                                <input id="when" type="text" placeholder="now" value="" class=""/>.
+                         <h1>I'm an
+                            <input id = "keyword" type="text" placeholder="Art Director" required value="" list="role-datalist" />
+                            <datalist id="role-datalist"></datalist>
+                            <br>looking for a job in
+                            <input id = "location" type="text" placeholder="London" required value="" list="location-datalist"/>
+                            <datalist id="location-datalist"></datalist>
+                            <br>as a
+                            <input id = "job_type" type="text" placeholder="Freelancer" required value="" list="type-datalist"/>
+                            <datalist id="type-datalist"></datalist>
+                            <br>
+                            <input type="submit" value="SUBMIT" class="btn btn-default" />
+
+                            
                             </h1>
-                        </form>
+                    </form>
                     </div>
 
                 </div>
@@ -171,7 +162,7 @@
 <section class="job-section">
     <div class="container">
         <div class="nav nav-tabs job-slider" id="recent_jobs_container">
-
+            
         </div>
         <!-- Nav tabs -->
 
@@ -181,17 +172,14 @@
 
 <section id="logos_section">
     <div class="container">
-        <div class="logo-section clearfix">
+        <div  class="logo-section clearfix">
             <!-- <div class="pull-left">
                 <i class="fa fa-bell"></i>
                 Turn on email alerts for this search
             </div> -->
             <ul class="list-unstyled pull-right">
                 <li><a href="#"><i class="fa fa-facebook"></i> </a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i> </a></li>
-                <li><a href="#"><i class="fa fa-google"></i> </a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i> </a></li>
-                <li><a href="#"><i class="fa fa-vimeo"></i> </a></li>
+                <li><a href="#"><i class="fa fa-xing"></i> </a></li>
             </ul>
 
         </div>
@@ -200,7 +188,7 @@
 
 </section>
 
-<section id="search_jobs_section">
+<section id ="search_jobs_section">
     <div class="container">
         <form action="" class="search-form">
             <input type="text" value="All Jobs">
@@ -210,39 +198,34 @@
 </section>
 
 <section>
-    <div class="container new_jobs" id="jobs_container">
-
-
+    <div class="container" id="jobs_container">
+         
+        
     </div>
 </section>
 
-<section id="contact_section">
+<section id ="contact_section">
     <div class="container">
         <div class="contact-section">
             <h3>Your Email</h3>
-
             <p>Get our top day's job offers delivered to your inbox</p>
-
-            <form action="" method="POST" id="contact_form">
+            <form action="" method="POST" id ="contact_form">
                 <div class="row">
                     <div class="col-sm-offset-1 col-sm-10">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-field">
-                                    <input type="text" name="name" class="form-control" required placeholder="name"
-                                           value="">
+                                    <input type="text" name="name" class="form-control" required placeholder="name" value = "">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-field">
-                                    <input type="email" name="email" class="form-control" required
-                                           placeholder="hello@gmail.com" value="">
+                                    <input type="email" name="email" class="form-control" required placeholder= "hello@gmail.com" value = "">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-field">
-                                    <input type="text" name="what" class="form-control" required
-                                           placeholder="What are you looking ?" value="">
+                                    <input type="text" name="what" class="form-control" required placeholder="What are you looking ?" value="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -250,19 +233,34 @@
                                     <button type="submit" class="slick-next slick-arrow">Next</button>
 
                                 </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </form>
+
+                </div>
             </form>
 
         </div>
-        </form>
-
-    </div>
     </div>
 </section>
+
+<footer id="main-footer">
+    <div class="footer-cont">
+        <div class="container">
+            <img src="/static/assets/images/big_logo.png">
+            <p>&copy 2017 STUDIO TIGERS GmbH / All rights reserved Eiffelstrasse 43, 22769 Germany</p>
+            <p><a href="#">Facebook</a> <a href="#">Twitter</a></p>
+            <span></span>
+            <p class="no-margin"><a href="#" class="impr">IMPRESSIUM</a></p>
+        </div>
+    </div>
+
+</footer>
+
+<div id="all_modal"></div>
 
 
 <script src="/static/assets/plugins/jquery/jquery-1.12.0.min.js"></script>

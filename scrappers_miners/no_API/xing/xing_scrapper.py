@@ -1,3 +1,4 @@
+from __future__ import print_function
 import csv
 import time
 import os
@@ -5,12 +6,16 @@ import os
 import requests
 
 from bs4 import BeautifulSoup
+from requests.exceptions import ConnectionError
 
 from elastic_search.utils import DuplicateHashError, DuplicateDataError
 from scrappers_miners.no_API.xing.es_structure import Xing
 from scrappers_miners.utils.utils import APIHead
 
 count = 0
+conn_refused_count = 0
+duplicate_hash_count = 0
+duplicate_data_count = 0
 
 
 def create_job_role_list():
@@ -31,12 +36,10 @@ def request_url(url):
     r = ''
     while r == '':
         try:
-            r = requests.get(url, headers=custom_headers)
-        except KeyboardInterrupt:
-            break
-        except:
-            print("Connection refused by the server..")
-            print("Let me sleep for 3 seconds")
+            r = requests.get(url, headers=custom_headers, timeout=10)
+        except ConnectionError:
+            global conn_refused_count
+            conn_refused_count += 1
             time.sleep(3)
             continue
     return r
@@ -52,7 +55,7 @@ def calculate_no_of_pages(soup):
 
 
 def yield_scrap_result(job_role, job_url):
-    global count
+    global count, duplicate_hash_count
 
     url = job_url
 
@@ -77,25 +80,30 @@ def yield_scrap_result(job_role, job_url):
 
         for index, job_attributes_selector in enumerate(job_attributes_selectors):
             if index == 3:
-                job_attributes.append(job_attributes_selector[0].get('datetime').encode(
-                    'utf-8')) if job_attributes_selector else job_attributes.append(None)
+                job_attributes.append(unicode(
+                    job_attributes_selector[0].get('datetime'))) if job_attributes_selector else job_attributes.append(
+                    None)
             elif index == 8:
-                job_attributes.append("https://www.xing.com" + job_attributes_selector[0].get('href').encode(
-                    'utf-8')) if job_attributes_selector else job_attributes.append(None)
+                job_attributes.append(unicode("https://www.xing.com" + job_attributes_selector[0].get(
+                    'href'))) if job_attributes_selector else job_attributes.append(None)
             elif index == 5:
                 if job_attributes_selector:
-                    career_level = job_attributes_selector[0].text.strip(' \t\n\rCareer level:').encode('utf-8')
+                    career_level = unicode(job_attributes_selector[0].text.strip(' \t\n\r')[13:].strip(' \t\n\r'))
                     job_attributes.append(career_level)
                 else:
                     job_attributes.append(None)
             else:
                 job_attributes.append(
-                    job_attributes_selector[0].text.encode(
-                        'utf-8')) if job_attributes_selector else job_attributes.append(
-                    None)
+                    unicode(job_attributes_selector[0].text)) if job_attributes_selector else job_attributes.append(None)
 
         count += 1
-        print '%d Entries Scraped' % count
+        print(
+            '%d Entries Scraped' % count
+            + '[Connection Refusals: %d' % conn_refused_count + ']'
+            + '[Hash collisions: %d' % duplicate_hash_count + ']'
+            + '[Data collisions: %d' % duplicate_data_count + ']',
+            end='\r'
+        )
 
         try:
             yield Xing(
@@ -112,7 +120,7 @@ def yield_scrap_result(job_role, job_url):
                 link=job_attributes[8]
             )
         except DuplicateHashError:
-            print 'Duplicate Hash in %s' % job_role
+            duplicate_hash_count += 1
             pass
 
         if next_job_selector:
@@ -133,7 +141,8 @@ def start(job_roles, base_url):
                 for job in yield_scrap_result(job_role, first_job_url):
                     yield job
             except DuplicateDataError:
-                print 'Data Collision - Skipping %s' % job_role
+                global duplicate_data_count
+                duplicate_data_count += 1
                 continue
 
 
