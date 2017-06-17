@@ -1,5 +1,4 @@
 from elasticsearch.client import Elasticsearch
-from elasticsearch_dsl.query import Q
 from elasticsearch_dsl.search import Search
 from rest_framework.decorators import api_view
 from django.http.response import JsonResponse
@@ -8,6 +7,43 @@ from rest_framework import status
 
 from elastic_search.es_core_config import create_connection
 from elastic_search.es_settings import INDEX_NAME
+
+
+def get_body(role=None, location=None, job_type=None):
+    body = {
+        "query": {
+            "bool": {
+                "must": [
+                    {
+                        "match": {
+                            "_all": {
+                                "query": role,
+                                "zero_terms_query": "all"
+                            }
+                        }
+                    } if role else {},
+                    {
+                        "match": {
+                            "_all": {
+                                "query": location,
+                                "zero_terms_query": "all"
+                            }
+                        }
+                    } if location else {},
+                    {
+                        "match": {
+                            "_all": {
+                                "query": job_type,
+                                "zero_terms_query": "all"
+                            }
+                        }
+                    } if job_type else {},
+                ]
+            },
+
+        }
+    }
+    return body
 
 
 def search_view(request):
@@ -51,15 +87,22 @@ def search_job_api(request):
     job_type = request.GET.get('job_type', "")
     when = request.GET.get('when', 0)
 
-    query_string = " ".join([role, location, job_type])
+    # query_string = " ".join([role, location, job_type])
+    #
+    # client = Elasticsearch()
+    # s = Search(using=client, index=INDEX_NAME)
+    # q = Q("multi_match", query=query_string, fields=['_all'])
+    # s = s.query(q).filter("range", **{'create_time': {'gte': when}}).sort('-create_time')[start:end]
 
-    client = Elasticsearch()
-    s = Search(using=client, index=INDEX_NAME)
-    q = Q("multi_match", query=query_string, fields=['_all'])
-    s = s.query(q).filter("range", **{'create_time': {'gte': when}}).sort('-create_time')[start:end]
+    es = create_connection()
+    res = es.search(
+        index=INDEX_NAME,
+        body=get_body(role, location, job_type),
+        from_=start,
+        size=(end - start)
+    )
 
-    response = s.execute()
-    return Response(response.to_dict())
+    return Response(res)
 
 
 @api_view(['GET'])
