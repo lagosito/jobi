@@ -172,3 +172,6 @@ NEWSLETTER_CONFIRM_EMAIL = True
 # Used by Celery and RabbitMq
 # Set interval for the Master to check for scrapper status [seconds]
 RMQ_REFRESH_RATE = 3600.00
+
+
+AUTH_USER_MODEL = 'user_custom.CustomUser'
