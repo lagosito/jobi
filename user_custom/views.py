@@ -17,3 +17,19 @@ class NewsletterSubscriptionView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def password_reset_confirm_view(request, uid, token):
+    context = {
+        'uid': uid,
+        'token': token
+    }
+    return render(request, 'auth/password_reset_confirm.html', context)
+
+
+def activate_account_view(request, uid, token):
+    context = {
+        'uid': uid,
+        'token': token
+    }
+    return render(request, 'auth/activate_account.html', context)
