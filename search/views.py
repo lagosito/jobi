@@ -18,7 +18,6 @@ def get_body(role=None, location=None, job_type=None):
                         "match": {
                             "_all": {
                                 "query": role,
-                                "zero_terms_query": "all"
                             }
                         }
                     } if role else {},
@@ -26,7 +25,6 @@ def get_body(role=None, location=None, job_type=None):
                         "match": {
                             "_all": {
                                 "query": location,
-                                "zero_terms_query": "all"
                             }
                         }
                     } if location else {},
@@ -34,7 +32,6 @@ def get_body(role=None, location=None, job_type=None):
                         "match": {
                             "_all": {
                                 "query": job_type,
-                                "zero_terms_query": "all"
                             }
                         }
                     } if job_type else {},

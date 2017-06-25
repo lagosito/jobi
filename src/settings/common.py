@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
 
     'tinymce',
     'django_extensions',
@@ -106,6 +108,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -163,3 +172,6 @@ NEWSLETTER_CONFIRM_EMAIL = True
 # Used by Celery and RabbitMq
 # Set interval for the Master to check for scrapper status [seconds]
 RMQ_REFRESH_RATE = 3600.00
+
+
+AUTH_USER_MODEL = 'user_custom.CustomUser'
