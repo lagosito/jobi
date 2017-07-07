@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^se/', include('search.urls', namespace='search')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^newsletter/', include('newsletter.urls')),
-    url(r'^auth/', include('djoser.urls.authtoken')),
     url(r'^accounts/', include('allauth.urls')),
 
 ]
