@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'rest_framework',
-    'rest_framework.authtoken',
-    'djoser',
+
+    'allauth',
+    'allauth.account',
 
     'tinymce',
     'django_extensions',
@@ -108,13 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-}
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -175,3 +169,19 @@ RMQ_REFRESH_RATE = 3600.00
 
 
 AUTH_USER_MODEL = 'user_custom.CustomUser'
+
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ACCOUNT_ADAPTER = "user_custom.adapter.CustomAllAuthAdapter"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_SIGNUP_FORM_CLASS = "user_custom.forms.CustomRegistrationForm"
+ACCOUNT_LOGOUT_ON_GET = True
+
+LOGIN_REDIRECT_URL = '/'
