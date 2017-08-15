@@ -44,7 +44,7 @@ def get_body(role=None, location=None, job_type=None):
 
 
 def search_view(request):
-    print request.GET
+    print (request.GET)
     if request.GET.get('keyword'):
         keyword = request.GET.get('keyword')
 

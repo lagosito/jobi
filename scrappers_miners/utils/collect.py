@@ -16,7 +16,7 @@ def create_list_file():
     try:
         embeddings = Embedding.load(os.path.join(DOWNLOAD_DIR, "embeddings2/en/embeddings_pkl.tar.bz2"))
     except Exception as e:
-        print e.message
+        print (e.message)
         ActivityLog.objects.create_log(
             None, level='C', view_name='scrappers_miners.utils.utils.create_list_file',
             message='Error in loading library (polyglot) - %s' % e.message,

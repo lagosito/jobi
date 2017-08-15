@@ -1,5 +1,8 @@
 #### In order of Execution [run from project source in environment]
 
+# Built on python 2.7 (code structure is compliant with python 3.6)
+# TODO: Test dependencies with python 3.6
+
 ## Pre-requisites
 # ElasticSearch Installation and running
 # RabbitMQ Installation, setup and running
