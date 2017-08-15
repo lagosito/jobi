@@ -6,6 +6,7 @@ billiard==3.5.0.2
 celery==4.0.2
 chardet==2.3.0
 Django==1.10
+django-allauth=0.32.0
 django-celery-beat==1.0.1
 django-celery-results==1.0.1
 django-extensions==1.7.7
@@ -14,7 +15,6 @@ django-newsletter==0.6
 django-tinymce==2.6.0
 django-webtest==1.9.1
 djangorestframework==3.6.2
-djoser==0.6.0
 elasticsearch==5.3.0
 elasticsearch-dsl==5.2.0
 -e git+https://github.com/mobolic/facebook-sdk.git@cbbe56f00ae7cb838f5dd5e1ca46671a6ec7b0a2#egg=facebook_sdk
