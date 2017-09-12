@@ -140,28 +140,6 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_dev", "media_root")
 
 SITE_ID = 1
 
-TINYMCE_JS_URL = os.path.join(STATIC_URL, "/tiny_mce/tiny_mce.js")
-TINYMCE_JS_ROOT = os.path.join(STATIC_URL, 'tiny_mce')
-
-TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "table,spellchecker,paste,searchreplace",
-    'theme': "advanced",
-    'cleanup_on_startup': True,
-    'custom_undo_redo_levels': 10,
-}
-TINYMCE_SPELLCHECKER = True
-TINYMCE_COMPRESSOR = True
-
-
-# FIXME : Complete installation of django newsletter
-# django-newsletter
-# https://django-newsletter.readthedocs.io/en/latest/index.html
-
-# Using django-tinymce as editor
-NEWSLETTER_RICHTEXT_WIDGET = "tinymce.widgets.TinyMCE"
-
-NEWSLETTER_CONFIRM_EMAIL = True
-
 
 # Used by Celery and RabbitMq
 # Set interval for the Master to check for scrapper status [seconds]

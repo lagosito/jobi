@@ -22,8 +22,6 @@ urlpatterns = [
     url(r'^jobs/', include('data.urls', namespace='data')),
     url(r'^', include('user_custom.urls', namespace='user_c')),
     url(r'^se/', include('search.urls', namespace='search')),
-    url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^newsletter/', include('newsletter.urls')),
     url(r'^accounts/', include('allauth.urls')),
 
 ]
