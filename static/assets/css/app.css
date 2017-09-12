@@ -164,6 +164,106 @@ a:hover {
   color: #001dfa;
 }
 /* line 92, ../sass/app.scss */
+
+.margin-60{
+  margin-top: 60px;
+}
+
+.margin-120{
+  margin-top: 120px;
+}
+
+.horizontal-line{
+  border-bottom: #001dfa solid 1px;
+}
+
+.newsletter-content h2 {
+  margin: 0 auto;
+  font: 300 48px "Lato", sans-serif;
+  color: #001dfa;
+}
+
+.newsletter-content h1 {
+  margin: 0 auto;
+  font: 900 48px "Lato", sans-serif;
+  color: #001dfa;
+}
+
+.newsletter-content p {
+    margin: 0 auto;
+    font: 300 20px "Lato", sans-serif;
+    line-height: 33px;
+    overflow: hidden;
+    max-width: 900px;
+    color: #001dfa;
+}
+
+.job-post .newsletter-job-count {
+  text-decoration: none;
+  outline: none;
+  transition-duration: 0.5s;
+  display: block;
+  background-color: #001dfa;
+  margin: 30px 0px;
+  border-radius: 3px;
+  color: #FFF;
+}
+
+/* line 369, ../sass/app.scss */
+.job-post .newsletter-job-title {
+  padding: 20px 15px;
+  border-bottom: #FFF solid 1px;
+  color: #001dfa;
+}
+/* line 372, ../sass/app.scss */
+.job-post .newsletter-job-title h3 {
+  margin: 0px;
+  font: 300 24px "Lato", sans-serif;
+  color: #FFF;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.job-post .newsletter-job-title h2 {
+  margin: 0px;
+  font: 400 24px "Lato", sans-serif;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.job-post .newsletter-job-title h1 {
+  margin: 0px;
+  font: 900 24px "Lato", sans-serif;
+  color: #FFF;
+  display: inline-block;
+}
+
+.job-post .newsletter-job-title span {
+  margin: 7px 0 0;
+  display: block;
+  font: 400 14px "Lato", sans-serif;
+  color:#FFF;
+}
+
+.newsletter-job-description {
+  cursor: pointer;
+  padding: 20px 15px;
+}
+/* line 400, ../sass/app.scss */
+.newsletter-job-description p {
+  margin: 0px;
+  font: 300 20px "Lato", sans-serif;
+  line-height: 33px;
+  overflow: hidden;
+  height: 66px;
+  color: #FFF;
+}
+/* line 406, ../sass/app.scss */
+.job-description p strong {
+  font-weight: 700;
+  font-size: 22px;
+}
+
 .home-content p {
   font: 400 18px "Lato", sans-serif;
   text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -542,6 +642,16 @@ a:hover {
   margin: 7px 0 0;
   display: block;
   font: 400 14px "Lato", sans-serif;
+  color:#001dfa;
+}
+
+.shadow{
+   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+
+.job-count:hover .job-title span{
+  color: #FFF;
 }
 
 /* line 397, ../sass/app.scss */
@@ -1073,7 +1183,7 @@ a:hover {
 }
 /* line 864, ../sass/app.scss */
 .footer-cont p a.impr {
-  font-size: 16px;
+  font-size: 12px;
 }
 /* line 867, ../sass/app.scss */
 .footer-cont p a:hover {
