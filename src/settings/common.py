@@ -43,10 +43,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
 
-    'tinymce',
     'django_extensions',
-    'sorl.thumbnail',
-    'newsletter',
+
+    'naomi',
+    'django_premailer',
 
     'django_celery_beat',
     'django_celery_results',
@@ -163,3 +163,12 @@ ACCOUNT_SIGNUP_FORM_CLASS = "user_custom.forms.CustomRegistrationForm"
 ACCOUNT_LOGOUT_ON_GET = True
 
 LOGIN_REDIRECT_URL = '/'
+
+
+TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
+TEMPLATED_EMAIL_TEMPLATE_DIR = 'email/'  # use '' for top level template dir, ensure there is a trailing slash
+TEMPLATED_EMAIL_FILE_EXTENSION = 'html'
+
+FROM_EMAIL = 'newsletter@jobi.de'
+
+EMAIL_FILE_PATH = os.path.join(os.path.dirname(BASE_DIR), 'mail_tests')
