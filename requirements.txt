@@ -21,7 +21,7 @@ futures==3.1.1
 kombu==4.0.2
 ldif3==3.2.2
 Morfessor==2.0.2a4
-nltk==3.2.2
+nltk==3.4.5
 numpy==1.12.1
 olefile==0.44
 packaging==16.8
